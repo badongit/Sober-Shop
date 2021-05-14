@@ -1,0 +1,50 @@
+
+###
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "badong2001",
+    "password": "124616"
+}
+
+//token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDllMTUxYWU3OGE2OTFjODg0NTAyZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMDk3MjgyNn0.Gusr1g03s5CYWDsOeCiIEOrtGUmNCfkoAB4u6Eos8pc
+
+###
+
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "badong2001",
+    "password": "124616"
+}
+
+###
+
+GET http://localhost:5000/api/auth
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDllMTUxYWU3OGE2OTFjODg0NTAyZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMDk3MzgzNn0.SWoT1JCN6V6r0wSPPXgAwOTEQzUcLksDoTMy0ioU6WM
+
+###
+
+PATCH http://localhost:5000/api/auth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDllMTUxYWU3OGE2OTFjODg0NTAyZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMDk3MzgzNn0.SWoT1JCN6V6r0wSPPXgAwOTEQzUcLksDoTMy0ioU6WM
+Content-Type: application/json
+
+{
+    "fullname": "Nguyễn Bá Đông",
+    "phoneNumber": "0834708721",
+    "address": "Hà Nam",
+    "accountBalance": 1000000
+}
+
+###
+
+PATCH http://localhost:5000/api/auth/password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDllMTUxYWU3OGE2OTFjODg0NTAyZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMDk3MzgzNn0.SWoT1JCN6V6r0wSPPXgAwOTEQzUcLksDoTMy0ioU6WM
+Content-Type: application/json
+
+{
+    "password": "123456",
+    "newPassword": "124616"
+}
