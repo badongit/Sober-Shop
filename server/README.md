@@ -11,28 +11,28 @@
 -   updatedAt: auto
 
 
-## Auth Routers
+# Auth Routers
 
-# POST /api/auth/register
+## POST /api/auth/register
 -   Mô tả: Đăng kí tài khoản
 -   Form yêu cầu: username và password
 -   Quyền truy cập: public
 
-# POST /api/auth/login
+## POST /api/auth/login
 -   Mô tả: Đăng nhập tài khoản
 -   Form yêu cầu: username và password
 -   Quyền truy cập: public
 
-# GET /api/auth
+## GET /api/auth
 -   Mô tả: Kiểm tra token hợp lệ, có trả về dữ liệu của tài khoản nếu tồn tại ( không bao gồm mật khẩu)
 -   Yêu cầu: có token trong request header 'Authorization'
 
-# PATCH /api/auth
+## PATCH /api/auth
 -   Mô tả: Cập nhật thông tin người dùng bao gồm fullname, phoneNumber, address, accountBalance ( không dùng để đổi mật khẩu )
 -   Form yêu cầu: các thuộc tính cho phép
 -   Quyền truy cập: user, admin
 
-# PATCH /api/auth/password
+## PATCH /api/auth/password
 -   Mô tả: Đổi mật khẩu
 -   Form yêu cầu: password và newPassword
 -   Quyền truy cập: user, admin
