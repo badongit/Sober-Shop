@@ -9,6 +9,8 @@ const FeedbackSchema = new Schema({
     evaluation: {
         type: Number,
         required: true,
+        min: 1,
+        max: 5,
     },
     user: {
         type: Schema.Types.ObjectId,

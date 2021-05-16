@@ -36,3 +36,37 @@
 -   Mô tả: Đổi mật khẩu
 -   Form yêu cầu: password và newPassword
 -   Quyền truy cập: user, admin
+
+# Category Schema
+-   name: kiểu String, bắt buộc, duy nhất
+-   thumb: kiểu String, bắt buộc
+
+# Product Schema
+-   name: kiểu String, bắt buộc
+-   thumb: kiểu mảng String (yêu cầu 2 ảnh), bắt buộc
+-   listImage: kiểu mảng String, mặc định undefined
+-   price: kiểu Number, bắt buộc
+-   discount: kiểu Number, mặc định 0, (% giảm giá)
+-   evaluation: kiểu Number, mặc định 0, (đánh giá trung bình theo dữ liệu của bảng Feedback)
+-   description: kiểu String, mặc định là ''
+-   sold: kiểu Number, mặc định là 0, (chỉ số lượng đã bán, tự tăng sau mỗi lần bán được sản phẩm)
+-   category: kiểu ObjectId, bắt buộc, tham chiếu tới bảng Category
+
+# Feedback Schema
+-   comment: kiểu String, mặc định là ''
+-   evaluation: kiểu Number, bắt buộc, nhỏ nhất là 1, lớn nhất là 5
+-   user: kiểu ObjectId, bắt buộc, tham chiếu tới bảng User
+-   product: kiểu ObjectId, bắt buộc, tham chiếu tới bảng Product
+
+# Order Schema 
+-   address: kiểu String, bắt buộc
+-   phoneNumber: kiểu String, bắt buộc, chuỗi phải đủ 10 kí tự và bắt đầu bằng kí tự 0
+-   totalAmount: kiểu Number, bắt buộc
+-   user: kiểu ObjectId, bắt buộc, tham chiếu tới bảng User
+
+# Order Detail Schema
+-   discount: kiểu số, bắt buộc (% giảm giá)
+-   quantity: kiểu số, bắt buộc (chỉ số lượng mua)
+-   order: kiểu ObjectId, bắt buộc, tham chiếu tới bảng Order
+-   product: kiểu ObjectId, bắt buộc, tham chiếu tới bảng Product
+-   amount: thuộc tính ảo ( chỉ thành tiền )

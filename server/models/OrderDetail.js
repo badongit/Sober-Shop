@@ -6,7 +6,11 @@ const OrderDetailSchema = new Schema({
         type: Number,
         required: true,
     },
-    amount: {
+    price: {
+        type: Number,
+        required: true,
+    },
+    quantity: {
         type: Number,
         required: true,
     },
@@ -26,8 +30,8 @@ const OrderDetailSchema = new Schema({
 
 mongoose.set('toJSON', { virtuals: true });
 
-OrderDetailSchema.virtual('intoMoney').get(function() {
-    return this.discount * this.amount;
+OrderDetailSchema.virtual('amount').get(function() {
+    return this.quantity * ( this.price - this.price * (this.discount/100));
 })
 
 module.exports = mongoose.model('orderDetails', OrderDetailSchema);
