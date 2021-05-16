@@ -5,10 +5,10 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     username: {
         type: String,
-        required: [true, 'username is required'],
-        unique: [true, 'username is taken'],
+        required: true,
+        unique: true,
         lowercase: true,
-        match: [/^[a-zA-Z0-9]{8,}$/, 'username is invalid'],
+        match: /^[a-zA-Z0-9]{8,}$/,
     },
     password: {
         type: String,
