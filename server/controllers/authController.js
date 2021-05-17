@@ -1,10 +1,12 @@
 const User = require('../models/User');
-const argon2 = require('argon2');
 const asyncHandle = require('../middlewares/asyncHandle');
 const ErrorResponse = require('../helpers/ErrorResponse');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+const bcrypt = require('bcrypt');
 dotenv.config();
+
+const saltRounds = 10;
 
 module.exports = {
 
@@ -12,11 +14,16 @@ module.exports = {
     // @desc User register
     // @access Public
     register: asyncHandle(async (req, res, next) => {
-        const { username, password } = req.body;
+        const { username, email, password, confirmPassword } = req.body;
 
         // Simple validation
-        if(!username || !password) {
-            return next(new ErrorResponse(400, 'Missing username and/or password'));
+        if(!(username && email && password && confirmPassword)) {
+            return next(new ErrorResponse(400, 'Missing information'));
+        }
+
+        // Confirm password
+        if(password !== confirmPassword) {
+            return next(new ErrorResponse(400, 'Confirm password does not match'));
         }
 
         // Check for existing username
@@ -27,9 +34,9 @@ module.exports = {
         }
 
         // Everything is good
-        const hashedPassword = await argon2.hash(password);
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        const newUser = new User({ username, password: hashedPassword, role: 'user'});
+        const newUser = new User({ username, email, password: hashedPassword });
         await newUser.save();
 
         const accessToken = jwt.sign({ userId: newUser._id, role: newUser.role }, process.env.TOKEN_ACCESS_SECRET);
@@ -59,7 +66,7 @@ module.exports = {
         }
 
         // Check password
-        const passwordValid = await argon2.verify(user.password, password);
+        const passwordValid = await bcrypt.compare(password, user.password);
 
         if(!passwordValid) {
             return next(new ErrorResponse(400, 'Incorect username or password'));
@@ -110,7 +117,22 @@ module.exports = {
     // @desc Change password
     // @access Private
     changePassword: asyncHandle(async (req, res, next) => {
-        const { password, newPassword } = req.body;
+        const { password, newPassword, confirmPassword } = req.body;
+
+        // Simple validation
+        if(!(password && newPassword && confirmPassword)) {
+            return next(new ErrorResponse(400, 'Missing information'));
+        }
+
+        // Check the difference between old password and new password
+        if(password === newPassword) {
+            return next(new ErrorResponse(400, 'The new password must be different from the old password'));
+        }
+
+         // Confirm password
+         if(newPassword !== confirmPassword) {
+            return next(new ErrorResponse(400, 'Confirm password does not match'));
+        }
 
         const user = await User.findById(req.userId);
 
@@ -120,14 +142,14 @@ module.exports = {
         }
 
         // Check password
-        const passwordValid = await argon2.verify(user.password, password);
+        const passwordValid = await bcrypt.compare(password, user.password);
 
         if(!passwordValid) {
             return next(new ErrorResponse(400, 'Incorrect password'));
         }
 
         // Everything is good
-        const hashedPassword = await argon2.hash(newPassword);
+        const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
         user.password = hashedPassword;
         await user.save();
         

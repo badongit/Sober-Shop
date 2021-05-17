@@ -1,6 +1,7 @@
 # UserSchema
 
 -	username: kiểu String, tối thiểu 8 kí tự, bắt buộc, duy nhất
+-   email: kiểu String, bắt buộc, duy nhất
 -	password: kiểu String, đã được mã hóa, bắt buộc
 -	fullname: kiểu String, không bắt buộc
 -	role : kiểu String, bắt buộc, chỉ thuộc 1 trong 2 giá trị "user" hoặc "admin"

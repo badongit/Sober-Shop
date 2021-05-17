@@ -10,6 +10,11 @@ const UserSchema = new Schema({
         lowercase: true,
         match: /^[a-zA-Z0-9]{8,}$/,
     },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
     password: {
         type: String,
         required: true,
@@ -19,6 +24,7 @@ const UserSchema = new Schema({
         type: String,
         enum: ['admin', 'user'],
         required: true,
+        default: 'user',
     },
     phoneNumber: {
         type: String,

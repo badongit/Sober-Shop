@@ -26,9 +26,10 @@ const OrderDetailSchema = new Schema({
     },
 }, {
     timestamps: true,
+    toJSON: {
+        virtuals: true,
+    },
 });
-
-mongoose.set('toJSON', { virtuals: true });
 
 OrderDetailSchema.virtual('amount').get(function() {
     return this.quantity * ( this.price - this.price * (this.discount/100));
