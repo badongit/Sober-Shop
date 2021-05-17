@@ -47,7 +47,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGEyM
 Content-Type: application/json
 
 {
-    "password": "124616",
+    "password": "123456",
     "newPassword": "124616",
     "confirmPassword": "124616"
 }

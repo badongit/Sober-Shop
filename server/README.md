@@ -16,7 +16,7 @@
 
 ## POST /api/auth/register
 -   Mô tả: Đăng kí tài khoản
--   Form yêu cầu: username và password
+-   Form yêu cầu: username, email, password, confirmPassword
 -   Quyền truy cập: public
 
 ## POST /api/auth/login
@@ -35,7 +35,7 @@
 
 ## PATCH /api/auth/password
 -   Mô tả: Đổi mật khẩu
--   Form yêu cầu: password và newPassword
+-   Form yêu cầu: password, newPassword, confirmPassword
 -   Quyền truy cập: user, admin
 
 # Category Schema
