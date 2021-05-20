@@ -4,13 +4,11 @@ POST http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
-    "username": "badong2001",
+    "username": "badong2000",
+    "email": "nguyenbadong201@gmail.com",
     "password": "124616",
-    "email": "nguyenbadong01@gmail.com",
     "confirmPassword": "124616"
 }
-
-//token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDllMTUxYWU3OGE2OTFjODg0NTAyZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMDk3MjgyNn0.Gusr1g03s5CYWDsOeCiIEOrtGUmNCfkoAB4u6Eos8pc
 
 ###
 
@@ -18,19 +16,19 @@ POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-    "username": "badong2001",
-    "password": "124616"
+    "username": "badong2000",
+    "password": "123456"
 }
 
 ###
 
 GET http://localhost:5000/api/auth
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGEyM2ZjOWVmNmI3NTMxZWMyMTI4Y2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTI0NTkzMH0.ZYckoIkn8C9tzJZ0XX5yjJcxU2vzUOFNPbLINvVDl6E
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE2ODI3NTM4NTc4NTFmNDA1MThkMDAiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTUyNTEwOSwiZXhwIjoxNjIxNTI1MTY5fQ.PUFAni-tPx8hGB2Y7IQUtpW6wsFgoE9jLZrTvdyhqyU
 
 ###
 
 PATCH http://localhost:5000/api/auth
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGEyM2ZjOWVmNmI3NTMxZWMyMTI4Y2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTI0NTkzMH0.ZYckoIkn8C9tzJZ0XX5yjJcxU2vzUOFNPbLINvVDl6E
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE2ODI3NTM4NTc4NTFmNDA1MThkMDAiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTUyNTEwOSwiZXhwIjoxNjIxNTI1MTY5fQ.PUFAni-tPx8hGB2Y7IQUtpW6wsFgoE9jLZrTvdyhqyU
 Content-Type: application/json
 
 {
@@ -43,11 +41,25 @@ Content-Type: application/json
 ###
 
 PATCH http://localhost:5000/api/auth/password
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGEyM2ZjOWVmNmI3NTMxZWMyMTI4Y2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTI0NTkzMH0.ZYckoIkn8C9tzJZ0XX5yjJcxU2vzUOFNPbLINvVDl6E
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE2ODI3NTM4NTc4NTFmNDA1MThkMDAiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTUyNTE5NywiZXhwIjoxNjIxNTI1MjU3fQ.TsrZKaJ29Em4gW6vy3L5-cNs6tfE6mMu_IerbsOhHs0
 Content-Type: application/json
 
 {
-    "password": "123456",
-    "newPassword": "124616",
-    "confirmPassword": "124616"
+    "password": "124616",
+    "newPassword": "123456",
+    "confirmPassword": "123456"
 }
+
+###
+
+POST http://localhost:5000/api/auth/token
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE2ODI3NTM4NTc4NTFmNDA1MThkMDAiLCJpYXQiOjE2MjE1MjUyODMsImV4cCI6MTYyNDExNzI4M30.0NdWI2-C1dgdnHQfdWal81eSmyLKtYJ8qur4ugiCam8"
+}
+
+###
+
+GET http://localhost:5000/api/auth/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE2ODI3NTM4NTc4NTFmNDA1MThkMDAiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTUyNTM1OSwiZXhwIjoxNjIxNTI1NDE5fQ.2wHeqrPra7MMxquH_bkWH9feWCE75I8O3_BnO8o2I9I

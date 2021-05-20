@@ -1,9 +1,11 @@
 const User = require('../models/User');
 const asyncHandle = require('../middlewares/asyncHandle');
 const ErrorResponse = require('../helpers/ErrorResponse');
+const GenerateRefreshToken = require('../helpers/GenerateRefreshToken');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const bcrypt = require('bcrypt');
+const redisClient = require('../config/redis');
 dotenv.config();
 
 const saltRounds = 10;
@@ -39,11 +41,14 @@ module.exports = {
         const newUser = new User({ username, email, password: hashedPassword });
         await newUser.save();
 
-        const accessToken = jwt.sign({ userId: newUser._id, role: newUser.role }, process.env.TOKEN_ACCESS_SECRET);
+        const accessToken = jwt.sign({ userId: newUser._id, role: newUser.role }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.ACCESS_TOKEN_EXPIRE });
+        const refreshToken = GenerateRefreshToken(newUser._id);
+
         res.json({
             success: true,
             message: 'Account successfully created',
             accessToken,
+            refreshToken,
         });
     }),
 
@@ -73,11 +78,14 @@ module.exports = {
         }
 
         // Everything is good
-        const accessToken = jwt.sign({ userId: user._id, role: user.role }, process.env.TOKEN_ACCESS_SECRET);
+        const accessToken = jwt.sign({ userId: user._id, role: user.role }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.ACCESS_TOKEN_EXPIRE });
+        const refreshToken = GenerateRefreshToken(user._id);
+
         res.json({
             success: true,
             message: 'Logged in successfully',
             accessToken,
+            refreshToken,
         });
     }),
 
@@ -154,5 +162,43 @@ module.exports = {
         await user.save();
         
         res.json({ success: true, message: "Change password successfully" });
+    }),
+
+    // @route [POST] /api/auth/token
+    // @desc Refresh access token
+    // @access private
+    getAccessToken: asyncHandle(async (req, res, next) => {
+        const userId = req.userId;
+
+        const user = await User.findOne({ _id: userId });
+
+        // Check for existing user
+        if(!user) {
+            return next(new ErrorResponse(404, 'User not found'));
+        }
+
+        // Everything is good
+        const accessToken = jwt.sign({ userId, role: user.role }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.ACCESS_TOKEN_EXPIRE });
+        const refreshToken = GenerateRefreshToken(userId);
+
+        res.json({ success: true, message: "Refesh access token", accessToken, refreshToken });
+    }),
+
+    // @route [GET] /api/auth/logout
+    // @desc Log out account
+    // @access private
+    logout: asyncHandle(async (req, res, next) => {
+        const userId = req.userId;
+
+        const user = await User.findOne({ _id: userId }).select('-password');
+
+        // Check for existing user
+        if(!user) {
+            return next(new ErrorResponse(404, 'User not found'));
+        }
+
+        await redisClient.del(userId.toString());
+
+        res.json({ success: true, message: "Log out successfully" });
     }),
 }

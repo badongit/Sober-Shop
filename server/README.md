@@ -29,14 +29,26 @@
 -   Yêu cầu: có token trong request header 'Authorization'
 
 ## PATCH /api/auth
--   Mô tả: Cập nhật thông tin người dùng bao gồm fullname, phoneNumber, address, accountBalance ( không dùng để đổi mật khẩu )
+-   Mô tả: Cập nhật thông tin người dùng bao gồm fullname, phoneNumber, email, address, accountBalance ( không dùng để đổi mật khẩu )
 -   Form yêu cầu: các thuộc tính cho phép
 -   Quyền truy cập: user, admin
+-   Yêu cầu: có token trong request header 'Authorization'
 
 ## PATCH /api/auth/password
 -   Mô tả: Đổi mật khẩu
 -   Form yêu cầu: password, newPassword, confirmPassword
 -   Quyền truy cập: user, admin
+-   Yêu cầu: có token trong request header 'Authorization'
+
+## POST /api/auth/token
+-   Mô tả: Làm mới lại token
+-   Form yêu cầu: refreshToken
+-   Yêu cầu: đã đăng nhập
+-   Quyền truy cập: user, admin
+
+## GET /api/auth/logout
+-   Mô tả: Đăng xuất tài khoản
+-   Yêu cần: có token trong request header 'Authorization'
 
 # Category Schema
 -   name: kiểu String, bắt buộc, duy nhất

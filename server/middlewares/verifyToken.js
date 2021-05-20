@@ -14,7 +14,7 @@ const verifyToken = (req, res, next) => {
 
     // Check valid token
     try {
-        const decode = jwt.verify(token, process.env.TOKEN_ACCESS_SECRET);
+        const decode = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
         req.userId = decode.userId;
         req.role = decode.role;

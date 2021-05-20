@@ -2,6 +2,7 @@ const express = require('express');
 const router = require('./routers');
 const dotenv = require('dotenv');
 const connectDB = require('./config/database');
+const generateRefreshToken = require('./helpers/GenerateRefreshToken');
 
 dotenv.config();
 
