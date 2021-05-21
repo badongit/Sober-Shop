@@ -50,6 +50,13 @@
 -   Mô tả: Đăng xuất tài khoản
 -   Yêu cần: có token trong request header 'Authorization'
 
+## POST /api/auth/forget-password
+-   Mô tả: Yêu cầu gửi link đặt lại mật khẩu tới email 
+-   Form yêu cầu: email
+
+## PATCH /api/auth/reset-password/:resetToken
+-   Mô tả: Đặt lại mật khẩu theo resetToken
+-   Form yêu cầu: newPassword, confirmPassword
 # Category Schema
 -   name: kiểu String, bắt buộc, duy nhất
 -   thumb: kiểu String, bắt buộc
