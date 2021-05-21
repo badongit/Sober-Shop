@@ -1,9 +1,9 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const ErrorResponse = require('../helpers/ErrorResponse');
-const dotenv = require('dotenv');
-dotenv.config();
+const redisClient = require('../config/redis');
 
-const verifyToken = (req, res, next) => {
+const verifyAccessToken = (req, res, next) => {
     const authHeader = req.header('Authorization');
     const token = authHeader && authHeader.split(' ')[1];
 
@@ -23,6 +23,61 @@ const verifyToken = (req, res, next) => {
     } catch (error) {
         next(new ErrorResponse(401, 'Invalid token'));
     }
+};
+
+const verifyRefreshToken = async (req, res, next) => {
+    const { refreshToken } = req.body;
+
+    // Check empty refresh token
+    if(!refreshToken) {
+        return next(new ErrorResponse(401, 'Refresh token not found'));
+    }
+
+    try {
+        const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+
+        redisClient.get(decoded.userId.toString(), function(error, redisRefreshToken) {
+            if(error) 
+               throw error;
+
+            // Check token stored in redis
+            if(!redisRefreshToken) {
+                return next(new ErrorResponse(401, 'Refresh token not stored'));
+            }
+
+            if(refreshToken !== redisRefreshToken) {
+                return next(new ErrorResponse(401, 'Refresh token not match token stored'));
+            }
+
+             // Everything is good
+            req.userId = decoded.userId;
+
+            next();
+        });
+       
+    } catch (error) {
+        return next(new ErrorResponse(401, 'Invalid token'));
+    }
+};
+
+const verifyResetToken = (req, res, next) => {
+    const { resetToken } = req.params;
+
+    // Check empty token
+    if(!resetToken) {
+        return next(new ErrorResponse(401, 'Not found reset token'));
+    }
+
+    // Check valid token
+    try {
+        const decoded = jwt.verify(resetToken, process.env.RESET_TOKEN_SECRET);
+
+        req.userId = decoded.userId;
+
+        next();
+    } catch (error) {
+        return next(new ErrorResponse(401, error.message))
+    }
 }
 
-module.exports = verifyToken;
+module.exports = { verifyAccessToken, verifyRefreshToken, verifyResetToken };

@@ -9,11 +9,13 @@ const UserSchema = new Schema({
         unique: true,
         lowercase: true,
         match: /^[a-zA-Z0-9]{8,}$/,
+        trim: true,
     },
     email: {
         type: String,
         required: true,
         unique: true,
+        trim: true,
     },
     password: {
         type: String,

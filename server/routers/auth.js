@@ -1,21 +1,21 @@
 const express = require('express');
-const verifyToken = require('../middlewares/verifyToken');
+const { verifyAccessToken, verifyRefreshToken, verifyResetToken }= require('../middlewares/verifyToken');
 const authController = require('../controllers/authController');
-const verifyRefreshToken = require('../middlewares/verifyRefreshToken');
 
 const router = express.Router();
 
 router
     .route('/')
-    .get(verifyToken, authController.confirm)
-    .patch(verifyToken, authController.updateInfor)
+    .get(verifyAccessToken, authController.confirm)
+    .patch(verifyAccessToken, authController.updateInfor)
     
-router.patch('/password', verifyToken, authController.changePassword)
+router.patch('/password', verifyAccessToken, authController.changePassword)
+router.post('/forget-password', authController.forgetPassword)
+router.patch('/reset-password/:resetToken', verifyResetToken, authController.resetPassword)
 
 router.post('/register', authController.register)
 router.post('/login', authController.login)
 router.post('/token', verifyRefreshToken, authController.getAccessToken)
-
-router.get('/logout', verifyToken, authController.logout)
+router.get('/logout', verifyAccessToken, authController.logout)
 
 module.exports = router;

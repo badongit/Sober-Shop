@@ -1,12 +1,12 @@
+require('dotenv').config();
 const User = require('../models/User');
 const asyncHandle = require('../middlewares/asyncHandle');
 const ErrorResponse = require('../helpers/ErrorResponse');
 const GenerateRefreshToken = require('../helpers/GenerateRefreshToken');
 const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv');
 const bcrypt = require('bcrypt');
 const redisClient = require('../config/redis');
-dotenv.config();
+const mailgun = require('mailgun-js')({ apiKey: process.env.MAILGUN_API_KEY, domain: process.env.MAILGUN_DOMAIN });
 
 const saltRounds = 10;
 
@@ -99,7 +99,7 @@ module.exports = {
 
         // Check for existing user
         if(!user) {
-            return next(new ErrorResponse(404, 'User not found'));
+            return next(new ErrorResponse(404, 'User not exist'));
         }
 
         // Everything is good
@@ -114,7 +114,7 @@ module.exports = {
 
         // Check for existing user
         if(!user) {
-            return next(new ErrorResponse(404, 'User not found'));
+            return next(new ErrorResponse(404, 'User not exist'));
         } 
 
         // Everything is good
@@ -146,7 +146,7 @@ module.exports = {
 
         // Check for existing user
         if(!user) {
-            return next(new ErrorResponse(404, 'User not found'));
+            return next(new ErrorResponse(404, 'User not exist'));
         }
 
         // Check password
@@ -174,7 +174,7 @@ module.exports = {
 
         // Check for existing user
         if(!user) {
-            return next(new ErrorResponse(404, 'User not found'));
+            return next(new ErrorResponse(404, 'User not exist'));
         }
 
         // Everything is good
@@ -194,11 +194,83 @@ module.exports = {
 
         // Check for existing user
         if(!user) {
-            return next(new ErrorResponse(404, 'User not found'));
+            return next(new ErrorResponse(404, 'User not exist'));
         }
 
         await redisClient.del(userId.toString());
 
         res.json({ success: true, message: "Log out successfully" });
     }),
+
+    // @route [POST] /api/auth/forget-password
+    // @desc Send password reset link to user's email
+    // @access public
+    forgetPassword: asyncHandle(async (req, res, next) => {
+        const { email } = req.body;
+
+        // Check empty email
+        if(!email) {
+            return next(new ErrorResponse(400, 'Empty email'));
+        }
+
+        const user = await User.findOne({ email });
+
+        // Check for existing user
+        if(!user) {
+            return next(new ErrorResponse(404, 'Not found user with this email'));
+        }
+
+        // Everything is good
+        const resetToken = jwt.sign({ userId: user._id }, process.env.RESET_TOKEN_SECRET, { expiresIn: process.env.RESET_TOKEN_EXPIRE });
+
+        const data = {
+            from: 'sobershop@hello.com',
+            to: email,
+            subject: 'Reset password for your account at Sober Shop',
+            html: `
+                <h2>Please click on given link to reset your account password at Sober Shop</h2>
+                <p>${process.env.CLIENT_URL}/auth/reset-password/${resetToken}</p>
+            `,
+        };
+
+        mailgun.messages().send(data, function(error, body) {
+            if(error) {
+                return next(new ErrorResponse(400, error.message));
+            };
+
+            res.json({ success: true, message: 'Email has been sent to the user'});
+        })
+    }),
+
+    // @route [PATCH] /api/auth/reset-password/:resetToken
+    // @desc Reset password with email
+    // @access public
+    resetPassword: asyncHandle(async (req, res, next) => {
+        const { newPassword, confirmPassword } = req.body;
+
+        // Simple validate
+        if(!(newPassword && confirmPassword)) {
+            return next(new ErrorResponse(400, 'Missing password'));
+        }
+
+        // Confirm password
+        if(newPassword !== confirmPassword) {
+            return next(new ErrorResponse(400, 'Confirm password does not match'));
+        }
+
+        const user = await User.findOne({ _id: req.userId });
+        
+        // Check for existing user
+        if(!user) {
+            return next(new ErrorResponse(404, 'User not exist'));
+        }
+
+        // Everything is good
+        const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+        user.password = hashedPassword;
+        await user.save();
+
+        res.json({ success: true, message: 'Reset password successfully'});
+    }),
+
 }
