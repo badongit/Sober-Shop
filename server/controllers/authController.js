@@ -6,7 +6,10 @@ const GenerateRefreshToken = require('../helpers/GenerateRefreshToken');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const redisClient = require('../config/redis');
-const mailgun = require('mailgun-js')({ apiKey: process.env.MAILGUN_API_KEY, domain: process.env.MAILGUN_DOMAIN });
+const mailgun = require('mailgun-js')({ 
+    apiKey: process.env.MAILGUN_API_KEY, 
+    domain: process.env.MAILGUN_DOMAIN, 
+});
 
 const saltRounds = 10;
 
