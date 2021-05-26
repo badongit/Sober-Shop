@@ -26,9 +26,8 @@ const OrderDetailSchema = new Schema({
     },
 }, {
     timestamps: true,
-    toJSON: {
-        virtuals: true,
-    },
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
 });
 
 OrderDetailSchema.virtual('amount').get(function() {

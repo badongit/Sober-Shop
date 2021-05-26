@@ -56,13 +56,13 @@ POST http://localhost:5000/api/auth/token
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE2ODI3NTM4NTc4NTFmNDA1MThkMDAiLCJpYXQiOjE2MjE1MjUyODMsImV4cCI6MTYyNDExNzI4M30.0NdWI2-C1dgdnHQfdWal81eSmyLKtYJ8qur4ugiCam8"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4MWI2NDNmN2UxYzJkNjRjNmE5MmYiLCJpYXQiOjE2MjE5OTQ0ODksImV4cCI6MTYyNDU4NjQ4OX0.FqDbeLcVhe7Nj3QHFMic9YRLAEdrHLn9iCLZ1wzYICA"
 }
 
 ###
 
 GET http://localhost:5000/api/auth/logout
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4MWI2NDNmN2UxYzJkNjRjNmE5MmYiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTYyOTc5NiwiZXhwIjoxNjIxNjI5ODU2fQ.LK0_v-k6pFLOx-mJ7fUkX0vaPejfZ7dD6On4-pSrers
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGEyM2ZjOWVmNmI3NTMxZWMyMTI4Y2MiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MjE5OTUyODIsImV4cCI6MTYyMTk5ODg4Mn0.hq_3XH2Oydn_pEeGi3RFzbxbW6y0YaZg6FAKb0Oj5JI
 
 ###
 
@@ -82,3 +82,61 @@ Content-Type: application/json
     "newPassword": "123456",
     "confirmPassword": "123456"
 }
+
+###
+
+POST http://localhost:5000/api/cart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4MWI2NDNmN2UxYzJkNjRjNmE5MmYiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTk1MzQ2NCwiZXhwIjoxNjIxOTU0NjY0fQ.s9RsPLd-7MEzz_mZE4MmjAf6yCH7TAtMlBl5rWjqhr0
+
+{
+    "productId": "60ad0ae335d3f7bfa3f046c6",
+    "quantity": 4
+}
+
+###
+
+GET http://localhost:5000/api/cart
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4MWI2NDNmN2UxYzJkNjRjNmE5MmYiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTk1MzQ2NCwiZXhwIjoxNjIxOTU0NjY0fQ.s9RsPLd-7MEzz_mZE4MmjAf6yCH7TAtMlBl5rWjqhr0
+
+###
+
+DELETE http://localhost:5000/api/cart/60aa50e851d43b43ac5b2935
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4MWI2NDNmN2UxYzJkNjRjNmE5MmYiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTkzNDUwOCwiZXhwIjoxNjIxOTM1NzA4fQ.HXpFA2WrBo5tYxF4inZuBk20dO52yjg7gUWcCIkJW30
+
+###
+
+PATCH http://localhost:5000/api/cart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4MWI2NDNmN2UxYzJkNjRjNmE5MmYiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTkzNDUwOCwiZXhwIjoxNjIxOTM1NzA4fQ.HXpFA2WrBo5tYxF4inZuBk20dO52yjg7gUWcCIkJW30
+
+{
+    "productId": "60aa50e851d43b43ac5b2935",
+    "quantity": 3
+}
+
+###
+
+POST http://localhost:5000/api/order
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4MWI2NDNmN2UxYzJkNjRjNmE5MmYiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTk5Mjk2MiwiZXhwIjoxNjIxOTk0MTYyfQ.xQHBJBCFIrlFjay3ELvhb-zSvCjJA8CHjg2Vp_-xJc4
+
+{
+    "address": "Hà Nam",
+    "phoneNumber": "0834708721",
+    "totalAmount": 76000,
+    "carts": [
+      "60ad0bd0e6729c26049723d5",
+      "60ad0be2e6729c26049723d6"
+    ]
+}
+
+###
+
+GET http://localhost:5000/api/order/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4MWI2NDNmN2UxYzJkNjRjNmE5MmYiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTk5NDQ4OSwiZXhwIjoxNjIxOTk4MDg5fQ.9ui6ss83Swg-W2tdCE95Imyq5Ye9UsPBmzKKf3qnDvE
+
+### 
+
+GET http://localhost:5000/api/order/admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGEyM2ZjOWVmNmI3NTMxZWMyMTI4Y2MiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MjE5OTUyODIsImV4cCI6MTYyMTk5ODg4Mn0.hq_3XH2Oydn_pEeGi3RFzbxbW6y0YaZg6FAKb0Oj5JI
