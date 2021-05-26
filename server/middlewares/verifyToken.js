@@ -38,7 +38,7 @@ const verifyRefreshToken = async (req, res, next) => {
 
         redisClient.get(decoded.userId.toString(), function(error, redisRefreshToken) {
             if(error) 
-               throw error;
+               return next(new ErrorResponse(401, error.message));
 
             // Check token stored in redis
             if(!redisRefreshToken) {
