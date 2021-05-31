@@ -6,7 +6,7 @@ const FeedbackSchema = new Schema({
         type: String,
         default: '',
     },
-    evaluation: {
+    rating_star: {
         type: Number,
         required: true,
         min: 1,
@@ -17,11 +17,11 @@ const FeedbackSchema = new Schema({
         required: true,
         ref: 'users',
     },
-    product: {
+    order_detail: {
         type: Schema.Types.ObjectId,
         required: true,
-        ref: 'products',
-    },
+        ref: 'orderDetails',
+    }
 }, {
     timestamps: true,
 });

@@ -3,6 +3,7 @@ const cartRouter = require('./cart');
 const orderRouter = require('./order');
 const productRouter = require("./product");
 const categoryRouter = require("./category");
+const feedbackRouter = require("./feedback");
 const errorHandle = require("../middlewares/errorHandle");
 
 module.exports = (app) => {
@@ -15,6 +16,8 @@ module.exports = (app) => {
   app.use('/api/cart', cartRouter);
 
   app.use('/api/order', orderRouter);
+
+  app.use('/api/feedback', feedbackRouter);
 
   app.use(errorHandle);
 };
