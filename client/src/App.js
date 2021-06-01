@@ -4,6 +4,9 @@ import './App.css'
 import Collection from './pages/Collection';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
+import Product from './pages/Product'
+import Contact from 'pages/Contact';
+import Team from 'pages/Team';
 
 function App() {
     return (
@@ -13,6 +16,9 @@ function App() {
                     <Route path="/" exact component={Home}></Route>
                     <Route path="/shop" component={Shop}></Route>
                     <Route path="/sober/collection" component={Collection}></Route>
+                    <Route path="/sober/products" component={Product}></Route>
+                    <Route path="/contact" component={Contact}></Route>
+                    <Route path="/team" component={Team}></Route>
                 </Switch>
             </div>
         </Router>

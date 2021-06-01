@@ -1,0 +1,43 @@
+$color-black: #000; 
+
+.TheTeam {
+    width: 100%;
+    padding: 40px;
+
+    .the-team-container {
+        text-align: center;
+        margin: 0 auto;
+
+        .slogan {
+            color: $color-black;
+
+            & span:first-child {
+                font-size: 30px;
+                font-weight: bold;
+            }
+
+            & span:last-child {
+                font-size: 22px;
+                color: #777;
+            }
+        }
+
+        .team-members {
+
+            &-title {
+                font-size: 30px;
+                margin: 30px 0;
+            }
+
+            &-img {
+                width: 80%;
+                margin: 0 auto;
+
+                .member-item {
+                    display: flex;
+                    justify-content: space-around;
+                }
+            }
+        }
+    }
+}

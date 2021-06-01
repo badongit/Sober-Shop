@@ -58,13 +58,13 @@ const NavBar = [
     },
     {
         id: "4",
-        title: "Page",
-        url: "/page"
+        title: "Contact",
+        url: "/contact"
     },
     {
         id: "5",
-        title: "Contact",
-        url: "/contact"
+        title: "Team",
+        url: "/team"
     },
 ]
 

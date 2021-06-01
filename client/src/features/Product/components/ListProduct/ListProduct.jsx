@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import ProductItem from '../ProductItem/ProductItem';
 import {PRODUCT_CATEGORY} from '../../../../constants/global'
-import './main.scss'
+import './listProduct.scss'
 import '../ProductItem/productItem.scss'
 
-export default function Main() {
+export default function ListProduct() {
 
     const [limit, setLimit] = useState(5)
     const [loading, setLoading] = useState(false)
@@ -16,26 +16,26 @@ export default function Main() {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
-            // let newListProduct = [ ...listProduct, ...products ]; 
-            // setListProduct(newListProduct);
+            const newListProduct = [ ...listProduct, ...PRODUCT_CATEGORY ]; 
+            setListProduct(newListProduct);
             setLimit(limit+5)
         },2000)
     }
-    const newListProduct = [...listProduct, ...PRODUCT_CATEGORY].slice(0, limit)
-    console.log(newListProduct);
+    const limitProduct = [...listProduct, ...PRODUCT_CATEGORY].slice(0, limit)
+    console.log(limitProduct);
 
     return (
         <div> 
             <div className="BestSeller">
-            <div className="ProductItem">
-                {newListProduct.map((item, index) => {
-                        return (
-                            <ProductItem
-                                key={index}
-                                product={item}
-                            />
-                        )
-                    })}
+                <div className="ProductItem">
+                    {limitProduct.map((item, index) => {
+                            return (
+                                <ProductItem
+                                    key={index}
+                                    product={item}
+                                />
+                            )
+                        })}
                 </div>
             </div>
             <div className="loadmore">

@@ -5,7 +5,10 @@ export const PRODUCT_CATEGORY = [
         sold: "76",
         price: "300000",
         finalPrice: "260000",
-        img: "https://cdn.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_433/https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2-2-433x516.jpg"
+        img: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-2-253x300.jpg",
+        img2: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2-2-433x516.jpg",
+        comment: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        des: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat accusantium doloremque laudantium."
     },
     {
         name: "Red Hoodie",
@@ -13,7 +16,10 @@ export const PRODUCT_CATEGORY = [
         sold: "76",
         price: "300000",
         finalPrice: "260000",
-        img: "https://cdn.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_433/https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2-2-433x516.jpg"
+        img: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-2-253x300.jpg",
+        img2: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2-2-433x516.jpg",
+        comment: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        des: "A dress is a garment traditionally worn by women or girls consisting of a skirt with an attached bodice It consists of a top piece that covers the torso and hangs"
     },
     {
         name: "Red Hoodie",
@@ -21,7 +27,10 @@ export const PRODUCT_CATEGORY = [
         sold: "76",
         price: "300000",
         finalPrice: "260000",
-        img: "https://cdn.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_433/https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2-2-433x516.jpg"
+        img: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-2-253x300.jpg",
+        img2: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2-2-433x516.jpg",
+        comment: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        des: "A dress is a garment traditionally worn by women or girls consisting of a skirt with an attached bodice It consists of a top piece that covers the torso and hangs"
     },
     {
         name: "Red Hoodie",
@@ -29,7 +38,10 @@ export const PRODUCT_CATEGORY = [
         sold: "76",
         price: "300000",
         finalPrice: "260000",
-        img: "https://cdn.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_433/https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2-2-433x516.jpg"
+        img: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-2-253x300.jpg",
+        img2: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2-2-433x516.jpg",
+        comment: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        des: "A dress is a garment traditionally worn by women or girls consisting of a skirt with an attached bodice It consists of a top piece that covers the torso and hangs"
     },
     {
         name: "Red Hoodie",
@@ -37,6 +49,9 @@ export const PRODUCT_CATEGORY = [
         sold: "76",
         price: "300000",
         finalPrice: "260000",
-        img: "https://cdn.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_433/https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2-2-433x516.jpg"
+        img: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-2-253x300.jpg",
+        img2: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2-2-433x516.jpg",
+        comment: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        des: "A dress is a garment traditionally worn by women or girls consisting of a skirt with an attached bodice It consists of a top piece that covers the torso and hangs"
     },
 ]

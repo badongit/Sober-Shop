@@ -21,17 +21,33 @@
                 background-color: #fc5050;
                 text-align: center;
                 padding: 0 8px;
+                z-index: 100;
             }
 
             &-bg {
                 width: 100%;
                 height: 100%;
 
-                img {
+                &>img {
                     width: 100%;
                     height: 100%;
                 }
+
+                .img-default {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+
+                .hide {
+                    visibility: hidden;
+                }
             }
+        }
+
+        &:hover .img-default{
+            visibility: visible;
+            transition: 0.7s ease-in-out;
         }
     }
 }

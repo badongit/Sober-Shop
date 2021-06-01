@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
-import Main from '../Main/Main'
-import './mainTab.scss'
+import ListProduct from '../ListProduct/ListProduct'
+import './carousel.scss'
 
-export default function MainTab() {
+export default function Carousel() {
     
     const [currentTab, setCurrentTab] = useState(1)
     const [isActive, setIsActive] = useState(1)
     
     return (
-        <div className="MainTab">
+        <div className="Carousel">
             <div className="main-tab">
                 <p 
                     onClick={() => {setCurrentTab(1); setIsActive(1)}}
@@ -31,7 +31,7 @@ export default function MainTab() {
             </div>
             <div className="tab-content">
                 {
-                    currentTab === 1 && <Main/>
+                    currentTab === 1 && <ListProduct/>
                 }
                 {
                     currentTab === 2 && <p>Min</p>

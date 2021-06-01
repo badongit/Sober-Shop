@@ -47,6 +47,8 @@ export default function ShopBody() {
         setLoading(true);
         setTimeout(() => {
             setLoading(false)
+            const newListProduct = [...listproduct, ...products];
+            setListProduct(newListProduct)
             setLimit(limit+5)
         },1000)
     }

@@ -1,7 +1,6 @@
 .BestSeller {
     display: flex;
     flex-wrap: wrap;
-    min-height: 550px;
     margin-bottom: 20px;
 }
 .loadmore {
@@ -16,6 +15,7 @@
         text-align: center;
         font-size: 16px;
         padding: 15px 25px;
+        margin-top: 30px;
         margin-bottom: 30px;
         opacity: 0.8;
 
