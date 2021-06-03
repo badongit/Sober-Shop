@@ -24,9 +24,6 @@ export default function CardItem({member}) {
                 <div className="member-social-icon">
                     <FaTwitter className="icon"/>
                 </div>
-                
-                
-                
             </div>
         </div>  
     )

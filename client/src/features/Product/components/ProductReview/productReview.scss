@@ -144,10 +144,10 @@ $color-white: #fff;
 
                         .flex {
                             display: flex;
+                            margin-bottom: 50px;
 
                             & div:first-child {
                                 width: 100%;
-                                margin-bottom: 50px;
                             }
 
                             & div:last-child {

@@ -3,6 +3,7 @@ import ProductItem from '../ProductItem/ProductItem';
 import {PRODUCT_CATEGORY} from '../../../../constants/global'
 import './listProduct.scss'
 import '../ProductItem/productItem.scss'
+import Loading from 'components/Loading/Loading';
 
 export default function ListProduct() {
 
@@ -41,8 +42,8 @@ export default function ListProduct() {
             <div className="loadmore">
                 <div className="loadmore-btn" onClick={handleClickIncrease}>Load More</div>
                 {loading === true &&
-                    <div>
-                        <div className="loading-icon"></div>
+                    <div className="loadmore-loading">
+                        <Loading/>
                     </div>
                 }
             </div>

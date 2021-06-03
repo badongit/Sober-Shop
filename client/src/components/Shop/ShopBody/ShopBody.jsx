@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {FaTh, FaThLarge, FaCircle, FaFilter} from 'react-icons/fa'
 import {PRODUCT_CATEGORY as products} from '../../../constants/global'
 import ProductItem from '../../../features/Product/components/ProductItem/ProductItem';
 import RangeSlider from '../RangeSlider/RangeSlider';
 import './shop.scss'
+import categoryApi from 'api/categoryApi';
 
 export default function ShopBody() {
 
@@ -13,35 +14,23 @@ export default function ShopBody() {
     const [limit, setLimit] = useState(5);
     const [loading, setLoading] = useState(false);
 
-    // let width, height, parentHeight, marginLeft, marginRight, classWidth = "";
-    // if (gridTab === 1) {
-    //     width = `${100/6}%`; // six
-    //     parentHeight = `${100/6}px`;
-    // } else if (gridTab === 2) {
-    //     width = '20%'; // five;
-    //     parentHeight = '20vw';
-    // } else if (gridTab === 3) {
-    //     width = '25%'; // four
-    //     parentHeight = '25vw';
-    // }
-
-    const categories = [
-        {
-            name: "Accessories",
-        },
-        {
-            name: "Bags",
-        },
-        {
-            name: "Footwear",
-        },
-        {
-            name: "Man",
-        },
-        {
-            name: "Women",
-        },
-    ]
+    // const categories = [
+    //     {
+    //         name: "Accessories",
+    //     },
+    //     {
+    //         name: "Bags",
+    //     },
+    //     {
+    //         name: "Footwear",
+    //     },
+    //     {
+    //         name: "Man",
+    //     },
+    //     {
+    //         name: "Women",
+    //     },
+    // ]
     
     const handleClickIncrease = () => {
         setLoading(true);
@@ -54,9 +43,22 @@ export default function ShopBody() {
     }
 
     const limitProduct = [...listproduct, ...products].slice(0, limit);
-    console.log(limitProduct);
+    // console.log(limitProduct);
 
-    
+    const [categories, setCategories] = useState([])
+    useEffect(() => {
+        const fetchCategory = async () => {
+            try {
+                const response = await categoryApi.getAll();
+                console.log(response);
+                setCategories(response.data);
+            } catch (error) {
+                console.log('Failed to fetch category list', error);
+            }
+        }
+
+        fetchCategory();
+    }, []);
 
     return (
         <div className="ShopBody">

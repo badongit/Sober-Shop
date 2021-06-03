@@ -14,7 +14,7 @@ export default function Home() {
             <Banner/>
             <RecommendBanner/>
             <Carousel/>
-            <New/>
+            <New />
             <Footer/>
         </div>
     )

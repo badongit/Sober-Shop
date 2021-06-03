@@ -84,7 +84,7 @@ export default function ProductDetail() {
                     </div>
                     <div className="product-info-vote">
                         <ReactStars
-                            count={5}
+                            value={4}
                             size={20}
                             activeColor="#ffd700"
                             className="rating"
