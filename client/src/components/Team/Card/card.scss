@@ -63,8 +63,16 @@
             align-items: center;
             transform: scale(1.08);
 
+<<<<<<< HEAD
             .icon {
                 font-size: 18px;
+=======
+                transform: scale(0);
+                transition: all 0.35s ease-out;
+                .icon {
+                    font-size: 18px;
+                }
+>>>>>>> auth
             }
         }
     }
