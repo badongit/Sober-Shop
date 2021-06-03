@@ -68,8 +68,7 @@
                 align-items: center;
 
                 transform: scale(0);
-                transition: all 0.35s;
-   ease-out  
+                transition: all 0.35s ease-out;
                 .icon {
                     font-size: 18px;
                 }
