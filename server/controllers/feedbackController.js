@@ -1,3 +1,16 @@
+/**
+ * @package Controllers
+ * @category feedbackController
+ *
+ * @api show() Show feedback by id
+ * @api create() Create a feedback
+ * @api update() Update a feedback
+ * @api delete() Delete a feedback
+ *
+ * @author Huu Ngoc Developer huungoc1994hd@gmail.com
+ * @date 31/05/2021
+ */
+
 const Feedback = require("../models/Feedback");
 const asyncHandle = require("../middlewares/asyncHandle");
 const sendResponse = require('../helpers/SendResponse');

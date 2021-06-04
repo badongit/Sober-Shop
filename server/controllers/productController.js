@@ -18,7 +18,30 @@ const sendResponse = require("../helpers/SendResponse");
 
 module.exports = {
   index: asyncHandle(async (req, res) => {
-    const products = await Product.find();
+    const conditions = {
+      price: {}
+    };
+
+    /*== Find if category_id is not empty ==*/
+    if (req.query.category_id) {
+      conditions.category = req.query.category_id;
+    }
+
+    /*== Find if name is not empty with regex ==*/
+    if (req.query.name) {
+      conditions.name = new RegExp(req.query.name, 'ig');
+    }
+
+    /*== Find with price between min_price and max_price ==*/
+    if (req.query.min_price) {
+      conditions.price.$gte = req.query.min_price ;
+    }
+
+    if (req.query.max_price) {
+      conditions.price.$lte = req.query.max_price;
+    }
+
+    const products = await Product.find(conditions);
 
     return sendResponse(res, "Get list successfully.", products);
   }),
