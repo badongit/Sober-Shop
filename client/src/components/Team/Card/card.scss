@@ -15,20 +15,28 @@
     }
     .member-info {
         position: absolute;
-        bottom: 30px;
-        color: #000;
+        top: 0;
+        bottom: 0;
+        background-color: transparent;
         width: 100%;
         z-index: 1000;
+        transition: all 0.35s ease-out;
 
         &-detail {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+
             width: 80%;
-            margin: 0 auto;
             padding: 2px;
-            text-align: center;
             background-color: #fff;
+
+            text-align: center;
             font-weight: bold;
             font-family: "Dancing Script", sans-serif;
-            transition: all 0.35s;
+
+            transition: all 0.35s ease-out;
 
             & p:first-child {
                 font-size: 28px;
@@ -38,45 +46,42 @@
                 font-size: 20px;
             }
         }
-    }
 
-    .member-social {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        background-color: #111;
-        opacity: 0;
-        transition: all 0.5s;
-
-        &-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid #fff;
-            color: #fff;
-            margin: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transform: scale(1.08);
-
-            transform: scale(0);
+        &-social {
             transition: all 0.35s ease-out;
-            .icon {
-                font-size: 18px;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+    
+            &-icon {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                border: 2px solid #fff;
+                margin: 10px;
+                color: #fff;
+                
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                transform: scale(0);
+                transition: all 0.35s ease-out;
+                .icon {
+                    font-size: 18px;
+                }
             }
         }
     }
 
-    &:hover .member-social {
-        // display: block;
-        opacity: 0.6;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    &:hover .member-info {
+        background-color: rgba(0, 0, 0, 0.603);
+
+        &-social-icon {
+            transform: scale(1);
+        }
     }
 
     &:hover .member-info-detail {
