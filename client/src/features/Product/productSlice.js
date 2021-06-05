@@ -12,7 +12,6 @@ const productSlice = createSlice ({
     //         state.productLoading = true;
     //     },
 
-    //     [initialProduct.rejected]: (state) => {
     //         state.productLoading = false;
     //     },
 
