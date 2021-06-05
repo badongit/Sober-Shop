@@ -11,10 +11,10 @@ export default function ProductItem({product}) {
                         {product.sold}
                     </div>
                     <div className="product-img-bg">
-                        <img src={product.img} alt="" />
+                        <img src={product.thumb[0]} alt="" />
                         <img 
                             className="img-default hide"
-                            src={product.img2}
+                            src={product.thumb[1]}
                             alt="" 
                         />
                     </div>
