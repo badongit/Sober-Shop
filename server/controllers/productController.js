@@ -18,9 +18,7 @@ const sendResponse = require("../helpers/SendResponse");
 
 module.exports = {
   index: asyncHandle(async (req, res) => {
-    const conditions = {
-      price: {}
-    };
+    const conditions = {};
 
     /*== Find if category_id is not empty ==*/
     if (req.query.category_id) {
@@ -34,10 +32,18 @@ module.exports = {
 
     /*== Find with price between min_price and max_price ==*/
     if (req.query.min_price) {
-      conditions.price.$gte = req.query.min_price ;
+      if (!conditions.price) {
+        conditions.price = {};
+      }
+
+      conditions.price.$gte = req.query.min_price;
     }
 
     if (req.query.max_price) {
+      if (!conditions.price) {
+        conditions.price = {};
+      }
+
       conditions.price.$lte = req.query.max_price;
     }
 
