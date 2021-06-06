@@ -26,23 +26,6 @@ const initialProduct = {
 }
 
 const productSlice = createSlice ({
-<<<<<<< HEAD
-    name: 'products',
-    initialState: initialProduct
-    // extraReducers: {
-    //     [initialProduct.pending]: (state) => {
-    //         state.productLoading = true;
-    //     },
-
-    //         state.productLoading = false;
-    //     },
-
-    //     [initialProduct.fullfilled]: (state) => {
-    //         state.productLoading = false;
-    //     },
-
-    // }
-=======
     name: 'product',
     initialState: initialProduct,
     reducers: {
@@ -61,7 +44,6 @@ const productSlice = createSlice ({
             state.productLoading = false;
         }
     }
->>>>>>> product
 })
 const { reducer, actions } = productSlice;
 
