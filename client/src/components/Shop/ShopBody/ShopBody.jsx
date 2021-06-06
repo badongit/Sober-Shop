@@ -1,49 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import {FaTh, FaThLarge, FaCircle, FaFilter} from 'react-icons/fa'
-import {PRODUCT_CATEGORY as products} from '../../../constants/global'
+// import {PRODUCT_CATEGORY as products} from '../../../constants/global'
 import ProductItem from '../../../features/Product/components/ProductItem/ProductItem';
 import RangeSlider from '../RangeSlider/RangeSlider';
 import './shop.scss'
 import categoryApi from 'api/categoryApi';
+import Loading from 'components/Loading/Loading';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllProduct } from 'features/Product/productSlice';
 
 export default function ShopBody() {
 
-    const [listproduct, setListProduct] = useState([...products]);
+    const {productArr: listProduct, productLoading} = useSelector(state => state.products)
+    const dispatch = useDispatch()
+
+    const [listproductItem, setListProductItem] = useState([...listProduct]);
     const [currentTab, setCurrentTab] = useState(1);
     const [gridTab, setGridTab] = useState(1)
     const [limit, setLimit] = useState(5);
-    const [loading, setLoading] = useState(false);
-
-    // const categories = [
-    //     {
-    //         name: "Accessories",
-    //     },
-    //     {
-    //         name: "Bags",
-    //     },
-    //     {
-    //         name: "Footwear",
-    //     },
-    //     {
-    //         name: "Man",
-    //     },
-    //     {
-    //         name: "Women",
-    //     },
-    // ]
-    
-    const handleClickIncrease = () => {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false)
-            const newListProduct = [...listproduct, ...products];
-            setListProduct(newListProduct)
-            setLimit(limit+5)
-        },1000)
-    }
-
-    const limitProduct = [...listproduct, ...products].slice(0, limit);
-    // console.log(limitProduct);
+    const [loading, setLoading] = useState(!productLoading);
 
     const [categories, setCategories] = useState([])
     useEffect(() => {
@@ -59,6 +34,33 @@ export default function ShopBody() {
 
         fetchCategory();
     }, []);
+
+    useEffect(() => {
+        
+        const getProduct = async () => {
+            try {
+                await dispatch(getAllProduct())
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        
+        getProduct();
+    }, [dispatch])
+
+    const handleClickIncrease = () => {
+        setLoading(productLoading)
+        setTimeout(() => {
+            setLoading(!productLoading)
+            const newListProduct = [...listproductItem, ...listProduct];
+            setListProductItem(newListProduct)
+            setLimit(limit+5)
+        },2000)
+    }
+
+    const limitProduct = [...listproductItem].slice(0, limit);
+    // console.log(limitProduct);
+
 
     return (
         <div className="ShopBody">
@@ -135,7 +137,7 @@ export default function ShopBody() {
                         </div>
 
                         <div className="shopbody-option flex">
-                            <div className="count">{products.length} products</div>
+                            <div className="count">{listProduct.length} products</div>
                             <div className="shopbody-option-grid flex">
                                 <div 
                                     className="grid-icon"
@@ -185,12 +187,14 @@ export default function ShopBody() {
 
 
                     <div className="loadmore">
-                        <div className="loadmore-btn" onClick={handleClickIncrease}>Load More</div>
-                        {loading === true &&
-                            <div>
-                                <div className="loading-icon"></div>
-                            </div>
-                        }
+                        <div className="loadmore-btn" onClick={handleClickIncrease}>
+                            <span>Load More</span>
+                            {loading === false &&
+                                <div className="loadmore-loading">
+                                    <Loading/>
+                                </div>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

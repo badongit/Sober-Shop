@@ -5,9 +5,9 @@ import './footer.scss'
 export default function Footer() {
     return (
         <div className="Footer">
-                <div class="container">
-                    <div class="row-row">
-                        <div class="footer-col">
+                <div className="container">
+                    <div className="row-row">
+                        <div className="footer-col">
                             <h4>Shop</h4>
                             <ul>
                                 <li><a href="/">About us</a></li>
@@ -16,7 +16,7 @@ export default function Footer() {
                                 <li><a href="/">Affiliate program</a></li>
                             </ul>
                         </div>
-                        <div class="footer-col">
+                        <div className="footer-col">
                             <h4>Get help</h4>
                             <ul>
                                 <li><a href="/">FAQ</a></li>
@@ -26,7 +26,7 @@ export default function Footer() {
                                 <li><a href="/">Payment options</a></li>
                             </ul>
                         </div>
-                        <div class="footer-col">
+                        <div className="footer-col">
                             <h4>Sober shop</h4>
                             <ul>
                                 <li><a href="/">Man</a></li>
@@ -35,9 +35,9 @@ export default function Footer() {
                                 <li><a href="/">Dress</a></li>
                             </ul>
                         </div>
-                        <div class="footer-col">
+                        <div className="footer-col">
                             <h4>Follow us</h4>
-                            <div class="social-links">
+                            <div className="social-links">
                                 <a href="/"><i><FaFacebookF/></i></a>
                                 <a href="/"><i><FaInstagram/></i></a>
                                 <a href="/"><i><FaTwitter/></i></a>

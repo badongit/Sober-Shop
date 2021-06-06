@@ -6,7 +6,6 @@
 .loadmore {
     margin: 0 auto;
     text-align: center;
-    display: inline-block;
 
     &-btn {
         width: 200px;
@@ -20,6 +19,7 @@
         margin-bottom: 30px;
         opacity: 0.8;
         position: relative;
+        cursor: pointer;
 
         &:hover {
             opacity: 1;
@@ -28,8 +28,11 @@
 
         .loadmore-loading {
             position: absolute;
-            top: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
         }
+
     }
 
 }
