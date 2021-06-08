@@ -42,20 +42,19 @@ export default function ProductDetail() {
                         })}
                     </div>
                     <div className="product-slider">
-                            {IMAGES && IMAGES.map((item, index) => {
-                            return (
-                                <div className="product-big" style={{ left: `calc(${index - imgIndex}*100%)`}} key={index}>
-                                    <div className="product-big-item" >
-                                        <img
-                                            id={index}
-                                            src={item.img}
-                                            alt="" 
-                                            // onClick={() => setImgIndex(index)}
-                                        />
-                                    </div>
+                        {IMAGES && IMAGES.map((item, index) => {
+                        return (
+                            <div className="product-big" style={{ left: `calc(${index - imgIndex}*100%)`}} key={index}>
+                                <div className="product-big-item" >
+                                    <img
+                                        id={index}
+                                        src={item.img}
+                                        alt="" 
+                                    />
                                 </div>
-                                )
-                            })}
+                            </div>
+                            )
+                        })}
                         <div 
                             className="change-product left"
                             onClick={() => {
