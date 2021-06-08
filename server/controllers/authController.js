@@ -31,6 +31,12 @@ module.exports = {
             return next(new ErrorResponse(400, 'Confirm password does not match'));
         }
 
+        // Check for existing email
+        const emailTaken = await User.findOne({ email });
+        if(emailTaken) {
+            return next(new ErrorResponse(400, 'Email is taken'));
+        }
+
         // Check for existing username
         const user = await User.findOne({ username });
 
