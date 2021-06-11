@@ -72,7 +72,7 @@ module.exports = {
         res.json({ success: true, message: 'The product has been deleted by user', cart: deletedCart });
     }),
 
-    // @route [PATCH] /api/cart
+    // @route [PUT] /api/cart
     // @@desc Update quantity for product in user's cart
     // @access Only role user
     update: asyncHandle(async (req, res, next) => {

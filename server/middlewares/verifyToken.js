@@ -20,7 +20,7 @@ const verifyAccessToken = (req, res, next) => {
 
     next();
   } catch (error) {
-    next(new ErrorResponse(401, "Invalid token"));
+    next(new ErrorResponse(401, error.message));
   }
 };
 

@@ -17,17 +17,17 @@ Content-Type: application/json
 
 {
     "username": "badong2001",
-    "password": "123456"
+    "password": "123456dong@"
 }
 
 ###
 
 GET http://localhost:5000/api/auth
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE2ODI3NTM4NTc4NTFmNDA1MThkMDAiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTUyNTEwOSwiZXhwIjoxNjIxNTI1MTY5fQ.PUFAni-tPx8hGB2Y7IQUtpW6wsFgoE9jLZrTvdyhqyU
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGEyM2ZjOWVmNmI3NTMxZWMyMTI4Y2MiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MjM0MjEzMjQsImV4cCI6MTYyMzQyNDkyNH0.aYrnTsz4_RmO_Fvaepg0jYvipqOD6HHbbwLnnAgtZGQ
 
 ###
 
-PATCH http://localhost:5000/api/auth
+PUT http://localhost:5000/api/auth
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE2ODI3NTM4NTc4NTFmNDA1MThkMDAiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTUyNTEwOSwiZXhwIjoxNjIxNTI1MTY5fQ.PUFAni-tPx8hGB2Y7IQUtpW6wsFgoE9jLZrTvdyhqyU
 Content-Type: application/json
 
@@ -40,14 +40,14 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:5000/api/auth/password
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE2ODI3NTM4NTc4NTFmNDA1MThkMDAiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTUyNTE5NywiZXhwIjoxNjIxNTI1MjU3fQ.TsrZKaJ29Em4gW6vy3L5-cNs6tfE6mMu_IerbsOhHs0
+PUT http://localhost:5000/api/auth/password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGEyM2ZjOWVmNmI3NTMxZWMyMTI4Y2MiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MjM0MzAwMTMsImV4cCI6MTYyMzQzMDA0M30.k8z3EJ_F9CvDU4Jv3kKT9P6IVUp5WRKFuA7bSBBDwgE
 Content-Type: application/json
 
 {
-    "password": "124616",
-    "newPassword": "123456",
-    "confirmPassword": "123456"
+    "password": "4122001dong@",
+    "newPassword": "123456dong@",
+    "confirmPassword": "123456dong@"
 }
 
 ###
@@ -75,7 +75,7 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:5000/api/auth/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGEyM2ZjOWVmNmI3NTMxZWMyMTI4Y2MiLCJpYXQiOjE2MjE2Mjg1MzAsImV4cCI6MTYyMTYyOTczMH0.DcMWyLnRALJHaSGA3J3AllNlHYPwADvZ_ec0aEYix24
+PUT http://localhost:5000/api/auth/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGEyM2ZjOWVmNmI3NTMxZWMyMTI4Y2MiLCJpYXQiOjE2MjE2Mjg1MzAsImV4cCI6MTYyMTYyOTczMH0.DcMWyLnRALJHaSGA3J3AllNlHYPwADvZ_ec0aEYix24
 Content-Type: application/json
 
 {
@@ -97,7 +97,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4M
 ###
 
 GET http://localhost:5000/api/cart
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4MWI2NDNmN2UxYzJkNjRjNmE5MmYiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTk1MzQ2NCwiZXhwIjoxNjIxOTU0NjY0fQ.s9RsPLd-7MEzz_mZE4MmjAf6yCH7TAtMlBl5rWjqhr0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGEyM2ZjOWVmNmI3NTMxZWMyMTI4Y2MiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MjM0MjEzMjQsImV4cCI6MTYyMzQyNDkyNH0.aYrnTsz4_RmO_Fvaepg0jYvipqOD6HHbbwLnnAgtZGQ
 
 ###
 
@@ -106,7 +106,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4M
 
 ###
 
-PATCH http://localhost:5000/api/cart
+PUT http://localhost:5000/api/cart
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4MWI2NDNmN2UxYzJkNjRjNmE5MmYiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTkzNDUwOCwiZXhwIjoxNjIxOTM1NzA4fQ.HXpFA2WrBo5tYxF4inZuBk20dO52yjg7gUWcCIkJW30
 

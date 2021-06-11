@@ -8,6 +8,7 @@ import Product from './pages/Product'
 import Contact from 'pages/Contact';
 import Team from 'pages/Team';
 import Login from 'features/Auth/pages/Login'
+import MyAccount from 'features/Auth/pages/MyAccount';
 
 function App() {
     return (
@@ -20,7 +21,8 @@ function App() {
                     <Route path="/sober/products" component={Product}></Route>
                     <Route path="/contact" component={Contact}></Route>
                     <Route path="/team" component={Team}></Route>
-                    <Route path="/account" component={Login} />
+                    <Route path="/auth" exact component={Login} />
+                    <Route path="/auth/my-account" component={MyAccount} />
                 </Switch>
             </div>
         </Router>

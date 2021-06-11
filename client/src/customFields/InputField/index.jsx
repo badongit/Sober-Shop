@@ -37,7 +37,7 @@ function InputField(props) {
                 disabled={disabled}
                 onChange={onChange}
                 onBlur={onBlur}
-                invalid={showError}
+                invalid={!!showError}
                 className={`input-field ${ value && 'input-active'}`}
             />
             { label && <Label className="label" for={name}>{label}</Label> }

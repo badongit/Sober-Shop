@@ -115,7 +115,7 @@ module.exports = {
         res.json({ success: true, user });
     }),
 
-    // @route [PATCH] /api/auth
+    // @route [PUT] /api/auth
     // @desc Update user information 
     // @access Private
     updateInfor: asyncHandle(async (req, res, next) => {
@@ -130,7 +130,7 @@ module.exports = {
         res.json({ success: true, user });
     }),
 
-    // @route [PATCH] api/auth/password
+    // @route [PUT] api/auth/password
     // @desc Change password
     // @access Private
     changePassword: asyncHandle(async (req, res, next) => {
@@ -251,7 +251,7 @@ module.exports = {
         })
     }),
 
-    // @route [PATCH] /api/auth/reset-password/:resetToken
+    // @route [PUT] /api/auth/reset-password/:resetToken
     // @desc Reset password with email
     // @access public
     resetPassword: asyncHandle(async (req, res, next) => {

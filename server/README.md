@@ -28,12 +28,12 @@
 -   Mô tả: Kiểm tra token hợp lệ, có trả về dữ liệu của tài khoản nếu tồn tại ( không bao gồm mật khẩu)
 -   Quyền truy cập: user, admin
 
-## PATCH /api/auth
+## PUT /api/auth
 -   Mô tả: Cập nhật thông tin người dùng bao gồm fullname, phoneNumber, email, address, accountBalance ( không dùng để đổi mật khẩu )
 -   Form yêu cầu: các thuộc tính cho phép
 -   Quyền truy cập: user, admin
 
-## PATCH /api/auth/password
+## PUT /api/auth/password
 -   Mô tả: Đổi mật khẩu
 -   Form yêu cầu: password, newPassword, confirmPassword
 -   Quyền truy cập: user, admin
@@ -53,7 +53,7 @@
 -   Form yêu cầu: email
 -   Quyền truy cập: public
 
-## PATCH /api/auth/reset-password/:resetToken
+## PUT /api/auth/reset-password/:resetToken
 -   Mô tả: Đặt lại mật khẩu theo resetToken
 -   Form yêu cầu: newPassword, confirmPassword
 -   Quyền truy cập: public
@@ -128,7 +128,7 @@
 -   Mô tả: Xóa sản phẩm trong giỏ hàng của người dùng
 -   Quyền truy cập: user
 
-## PATCH /api/cart
+## PUT /api/cart
 -   Mô tả: Cập nhật số lượng sản phẩm muốn mua trong giỏ hàng của người dùng
 -   Form yêu cầu: productId, quantity
 -   Quyền truy cập: user

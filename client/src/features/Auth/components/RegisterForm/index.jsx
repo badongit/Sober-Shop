@@ -9,7 +9,9 @@ function RegisterForm(props) {
     const { onSubmit, select } = props;
     const initialValues = {
         username: '',
+        email: '',
         password: '',
+        confirmPassword: '',
     };
 
     const style = select === 'register' ? {
