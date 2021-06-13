@@ -18,33 +18,31 @@
             &:hover {
                 color: #000;
             }
+        }
 
-            &::after {
-                content: '';
-                position: absolute;
-                display: block;
-                height: 3px;
-                width: 0;
-                right: 0;
-                bottom: -3px;
-                margin-top: 3px;
-                background: #000;
-                transition: 0.5s all;
-            }
+        &-item::after {
+            content: '';
+            position: absolute;
+            display: block;
+            height: 3px;
+            width: 0;
+            right: 0;
+            bottom: -3px;
+            margin-top: 3px;
+            background: #000;
+            transition: 0.5s all;
 
             &:hover::after {
                 animation: active_line 0.5s ease-in;
                 width: 100%;
                 left: 0;
             }
-
         }
 
-        &-active {
-            color: #000!important;
-             
+        .active {
+            color: #000;
             &::after {
-                animation: none!important;
+                animation-name: none!important;
                 bottom: -5px;
                 height: 2px;
                 width: 100%;

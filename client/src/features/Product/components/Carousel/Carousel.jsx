@@ -12,19 +12,19 @@ export default function Carousel() {
             <div className="main-tab">
                 <p 
                     onClick={() => {setCurrentTab(1); setIsActive(1)}}
-                    className={isActive === 1 ? 'main-tab-active' : ''}
+                    className={isActive === 1 ? 'main-tab-item active' : 'main-tab-item'}
                 >
                     Best Sellers
                 </p>
                 <p 
                     onClick={() => {setCurrentTab(2); setIsActive(2)}}
-                    className={isActive === 2 ? 'main-tab-active' : ''}
+                    className={isActive === 2 ? 'main-tab-item active' : 'main-tab-item'}
                 >
                     New Products
                 </p>
                 <p 
                     onClick={() => {setCurrentTab(2); setIsActive(2)}}
-                    className={isActive === 3 ? 'main-tab-active' : ''}
+                    className={isActive === 3 ? 'main-tab-item active' : 'main-tab-item'}
                 >
                     Sale Products
                 </p>
