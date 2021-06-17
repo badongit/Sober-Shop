@@ -7,6 +7,7 @@
     width: 100%;
     margin: 15px 15px 20px 15px;
     padding-right: 30px;
+    font-family: "Poppins", sans-serif;
     box-sizing: border-box;
 
         &-img {
@@ -19,7 +20,7 @@
                 font-weight: 550;
                 color: #fff;
 
-                top: 15px;
+                top: 10px;
                 left: 0;
                 text-align: center;
                 padding: 2px 10px;
@@ -63,6 +64,17 @@
         &:hover .img-default{
             visibility: visible;
             transition: 0.7s ease-in-out;
+        }
+
+        &-title {
+            text-align: center;
+            margin: 20px 0 10px 0;
+        }
+
+        &-price {
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
         }
     }
 }

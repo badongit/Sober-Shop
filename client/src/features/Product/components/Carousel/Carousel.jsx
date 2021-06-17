@@ -1,12 +1,32 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import ListProduct from '../ListProduct/ListProduct'
-import './carousel.scss'
+import { getAllProduct } from 'features/Product/productSlice';
+import './carousel.scss';
+import Loading from 'components/Loading/Loading';
 
 export default function Carousel() {
+
+    const dispatch = useDispatch();
+
+    const productArr = useSelector(state => state.products.productArr);
+    const productLoading = useSelector(state => state.products.productLoading);
+
+    const [currentTab, setCurrentTab] = useState(1);
+    const [isActive, setIsActive] = useState(1);
+
+    useEffect(() => {
+        dispatch(getAllProduct())
+    }, [dispatch]);
+
+    const saleProduct = productArr.filter(product => product.discount > 0);
+
+    console.log({ saleProduct });
     
-    const [currentTab, setCurrentTab] = useState(1)
-    const [isActive, setIsActive] = useState(1)
-    
+    const newProduct = productArr.filter(product => (Date.now() - Date.parse(product.createdAt)) / (1000 * 3600 * 24) < 10);
+
+    console.log({ newProduct });
+
     return (
         <div className="Carousel">
             <div className="main-tab">
@@ -23,7 +43,7 @@ export default function Carousel() {
                     New Products
                 </p>
                 <p 
-                    onClick={() => {setCurrentTab(2); setIsActive(2)}}
+                    onClick={() => {setCurrentTab(3); setIsActive(3)}}
                     className={isActive === 3 ? 'main-tab-item active' : 'main-tab-item'}
                 >
                     Sale Products
@@ -31,10 +51,13 @@ export default function Carousel() {
             </div>
             <div className="tab-content">
                 {
-                    currentTab === 1 && <ListProduct/>
+                    currentTab === 1 && ( productLoading ? <Loading backgroundColor="black" /> : <ListProduct product={productArr}/>)
                 }
                 {
-                    currentTab === 2 && <p>Min</p>
+                    currentTab === 2 && <ListProduct product={newProduct}/>
+                }
+                {
+                    currentTab === 3 && <ListProduct product={saleProduct}/>
                 }
             </div>
             

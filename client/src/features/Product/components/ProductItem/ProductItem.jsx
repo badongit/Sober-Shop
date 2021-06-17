@@ -4,7 +4,7 @@ import './productItem.scss'
 
 export default function ProductItem({ product }) {
     
-    const productDate = new Date(product.createAt);
+    const productDate = Date.parse(product.createdAt);
     const today = new Date();
 
     return (
@@ -42,7 +42,7 @@ export default function ProductItem({ product }) {
                     {product.name}
                 </div>
                 <div className="product-price">
-                    {product.price}
+                    ${product.price}.00
                 </div>
             </div>            
         </div>
