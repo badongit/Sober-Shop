@@ -18,7 +18,19 @@ const authApi = {
 
         return axiosClient.post(ENDPOINT.auth.register, userForm);
     },
+    updateInfor: (userForm) => {
 
+        return axiosClient.put(ENDPOINT.auth.updateInfor, userForm);
+    },
+    changePassword: (userForm) => {
+
+        return axiosClient.put(ENDPOINT.auth.changePassword, userForm);
+    },
+    logout: () => {
+        
+        return axiosClient.get(ENDPOINT.auth.logout);
+    }
+    
 };
 
 export default authApi;

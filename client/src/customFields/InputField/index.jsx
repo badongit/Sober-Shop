@@ -38,7 +38,7 @@ function InputField(props) {
                 onChange={onChange}
                 onBlur={onBlur}
                 invalid={!!showError}
-                className={`input-field ${ value && 'input-active'}`}
+                className={`input-field ${ (value === 0 || value) && 'input-active'}`}
             />
             { label && <Label className="label" for={name}>{label}</Label> }
             { showError && <FormFeedback>{errors[name]}</FormFeedback> }

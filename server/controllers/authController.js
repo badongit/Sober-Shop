@@ -119,14 +119,40 @@ module.exports = {
     // @desc Update user information 
     // @access Private
     updateInfor: asyncHandle(async (req, res, next) => {
-        const user = await User.findByIdAndUpdate(req.userId, { ...req.body }, { new: true }).select('-password');
-
+        
+        const user = await User.findById(req.userId).select('-password');
+                
         // Check for existing user
         if(!user) {
             return next(new ErrorResponse(404, 'User not exist'));
         } 
 
+        const { 
+            fullname = user.fullname,
+            phoneNumber = user.phoneNumber, 
+            email = user.email, 
+            address = user.address, 
+            money = 0, 
+        } = req.body;
+
+        // Check for existing email
+        if(email !== user.email) {
+            const userWithEmail = await User.findOne({ email });
+
+            if(userWithEmail)
+                return next(new ErrorResponse(400, 'This email is taken'));
+        } 
+
         // Everything is good
+
+        user.fullname = fullname;
+        user.phoneNumber = phoneNumber;
+        user.email = email;
+        user.address = address;
+        user.accountBalance = user.accountBalance + (+money);
+
+        await user.save();
+
         res.json({ success: true, user });
     }),
 

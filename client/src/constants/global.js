@@ -68,7 +68,12 @@ export const ENDPOINT = {
         forgetPassword: '/auth/forget-password',
         resetPassword: '/auth/reset-password',
     },
-    
+    order: {
+        addOrder: '/order',
+        getOrderUser: '/order/user',
+        getOrderAdmin: '/order/admin',
+        getOrder: '/order', // /order/:id
+    }
 };
 
 export const LOCAL_STORAGE = {

@@ -4,8 +4,11 @@ import MenuDropDown from './MenuDropDown'
 import thumbShop from '../../assets/images/women-dropdown.jpg'
 import {FaSearch, FaUser, FaCartPlus } from 'react-icons/fa'
 import './header.scss'
+import { useHistory } from 'react-router-dom'
 
 export default function Header() {
+    const history = useHistory();
+
     return (
         <div className="Header">
             <div className="header-container">
@@ -29,7 +32,7 @@ export default function Header() {
                 </div>
                 <div className="header-container-right">
                     <div className="cart"><FaSearch/></div>
-                    <div className="cart"><FaUser/></div>
+                    <div className="cart" onClick={() => history.push('/user')}><FaUser/></div>
                     <div className="cart"><FaCartPlus/></div>
                 </div>
             </div>

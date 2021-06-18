@@ -4,10 +4,10 @@ POST http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
-    "username": "badong2000",
-    "email": "nguyenbadong201@gmail.com",
-    "password": "124616",
-    "confirmPassword": "124616"
+    "username": "badong2002",
+    "email": "nguyenbadong301@gmail.com",
+    "password": "123456dong@",
+    "confirmPassword": "123456dong@"
 }
 
 ###
@@ -16,25 +16,24 @@ POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-    "username": "badong2001",
+    "username": "badong2002",
     "password": "123456dong@"
 }
 
 ###
 
 GET http://localhost:5000/api/auth
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGEyM2ZjOWVmNmI3NTMxZWMyMTI4Y2MiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MjM0MjEzMjQsImV4cCI6MTYyMzQyNDkyNH0.aYrnTsz4_RmO_Fvaepg0jYvipqOD6HHbbwLnnAgtZGQ
-
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGNjNTk5NjM5NWMwYzFjYjhmZjE2N2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyNDAwNTQ2MCwiZXhwIjoxNjI0MDA2NjYwfQ.egbtbQoj9BUVDWF1rqWtpBf-6hgX_kLkfAAE1HGcZCY
 ###
 
 PUT http://localhost:5000/api/auth
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE2ODI3NTM4NTc4NTFmNDA1MThkMDAiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTUyNTEwOSwiZXhwIjoxNjIxNTI1MTY5fQ.PUFAni-tPx8hGB2Y7IQUtpW6wsFgoE9jLZrTvdyhqyU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGNjNTk5NjM5NWMwYzFjYjhmZjE2N2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyNDAwNTQ2MCwiZXhwIjoxNjI0MDA2NjYwfQ.egbtbQoj9BUVDWF1rqWtpBf-6hgX_kLkfAAE1HGcZCY
 Content-Type: application/json
 
 {
     "fullname": "Nguyễn Bá Đông",
     "phoneNumber": "0834708721",
-    "address": "Hà Nam",
+    "address": "Kim Bảng - Hà Nam",
     "accountBalance": 1000000
 }
 
@@ -70,7 +69,7 @@ POST http://localhost:5000/api/auth/forget-password
 Content-Type: application/json
 
 {
-    "email": "nguyenbadong01@gmail.com"
+    "email": "nguyenbadong201@gmail.com"
 }
 
 ###
@@ -87,11 +86,11 @@ Content-Type: application/json
 
 POST http://localhost:5000/api/cart
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4MWI2NDNmN2UxYzJkNjRjNmE5MmYiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTk1MzQ2NCwiZXhwIjoxNjIxOTU0NjY0fQ.s9RsPLd-7MEzz_mZE4MmjAf6yCH7TAtMlBl5rWjqhr0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGNjNTk5NjM5NWMwYzFjYjhmZjE2N2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyNDAwNTQ2MCwiZXhwIjoxNjI0MDA2NjYwfQ.egbtbQoj9BUVDWF1rqWtpBf-6hgX_kLkfAAE1HGcZCY
 
 {
-    "productId": "60ad0ae335d3f7bfa3f046c6",
-    "quantity": 4
+    "productId": "60afefeb8841df28fc60331d",
+    "quantity": 2
 }
 
 ###
@@ -108,10 +107,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4M
 
 PUT http://localhost:5000/api/cart
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4MWI2NDNmN2UxYzJkNjRjNmE5MmYiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTkzNDUwOCwiZXhwIjoxNjIxOTM1NzA4fQ.HXpFA2WrBo5tYxF4inZuBk20dO52yjg7gUWcCIkJW30
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGNjNTk5NjM5NWMwYzFjYjhmZjE2N2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyNDAwNTQ2MCwiZXhwIjoxNjI0MDA2NjYwfQ.egbtbQoj9BUVDWF1rqWtpBf-6hgX_kLkfAAE1HGcZCY
 
 {
-    "productId": "60aa50e851d43b43ac5b2935",
+    "productId": "60afed8d8841df28fc60331c",
     "quantity": 3
 }
 
@@ -119,15 +118,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4M
 
 POST http://localhost:5000/api/order
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGE4MWI2NDNmN2UxYzJkNjRjNmE5MmYiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTk5Mjk2MiwiZXhwIjoxNjIxOTk0MTYyfQ.xQHBJBCFIrlFjay3ELvhb-zSvCjJA8CHjg2Vp_-xJc4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGNjNTk5NjM5NWMwYzFjYjhmZjE2N2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTYyNDAwNjc0OSwiZXhwIjoxNjI0MDA3OTQ5fQ.mC5ncnKAeADJFSHcef7IqXt0wKUC9uN3Wb92T_dhLBE
 
 {
     "address": "Hà Nam",
     "phoneNumber": "0834708721",
-    "totalAmount": 76000,
     "carts": [
-      "60ad0bd0e6729c26049723d5",
-      "60ad0be2e6729c26049723d6"
+      "60cc5bf01bba6a285c97245d",
+      "60cc5c8fa7988621ec471a12"
     ]
 }
 
