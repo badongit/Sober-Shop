@@ -74,10 +74,6 @@ export default function ProductReview() {
         const newProductRev = [...productVote, data];
         setProductVote(newProductRev)
         setReviewInput("")
-        // console.log(data);
-        // console.log(newProductRev)
-
-        
     }
 
     useEffect(() => {
@@ -122,9 +118,9 @@ export default function ProductReview() {
                                     isHalf: true
                                 }
                                 const date = new Date()
-                                const day = date.getDay()
-                                const month = date.getMonth()+1
-                                const year = date.getFullYear()
+                                const day = date.getDate();
+                                const month = date.getMonth() + 1;
+                                const year = date.getFullYear();
                                 return (
                                     <div className="product-rev-item" key={index}>
                                         <div className="user-avt">

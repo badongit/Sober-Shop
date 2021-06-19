@@ -14,9 +14,15 @@ export default function Loading(props) {
 
     return (
         <div className="Loading">
+<<<<<<< HEAD
             <div className="bounce1" style={{ backgroundColor }} ></div>
             <div className="bounce2" style={{ backgroundColor }} ></div>
             <div className="bounce3" style={{ backgroundColor }} ></div>
+=======
+            <div className="bounce1" style={{ backgroundColor}} ></div>
+            <div className="bounce2" style={{ backgroundColor}} ></div>
+            <div className="bounce3" style={{ backgroundColor}} ></div>
+>>>>>>> product
         </div>
     )
 }

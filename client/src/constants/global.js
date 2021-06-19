@@ -66,13 +66,18 @@ export const ENDPOINT = {
         getAccessToken: '/auth/token',
         logout: '/auth/logout',
         forgetPassword: '/auth/forget-password',
+<<<<<<< HEAD
         resetPassword: '/auth/reset-password',
+=======
+        resetPassword: '/auth/reset-password', // /auth/reset-password/:resetToken
+>>>>>>> product
     },
     order: {
         addOrder: '/order',
         getOrderUser: '/order/user',
         getOrderAdmin: '/order/admin',
         getOrder: '/order', // /order/:id
+<<<<<<< HEAD
     }
 };
 
@@ -81,3 +86,10 @@ export const LOCAL_STORAGE = {
     refreshToken: 'x-refresh-token',
 
 };
+=======
+    },
+    cart: {
+        add: '/cart',
+    }
+};
+>>>>>>> product

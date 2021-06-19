@@ -2,16 +2,27 @@ import React, { useState } from 'react'
 import IMAGES from '../../../../constants/image'
 import {PRODUCT_CATEGORY as products} from '../../../../constants/global'
 import ReactStars from 'react-rating-stars-component'
-import {FaMinus, FaPlus, FaCartPlus, FaRegHeart, FaAngleRight, FaChevronLeft, FaChevronRight, FaFacebook, FaTwitter, FaPinterest} from 'react-icons/fa'
+import {
+    FaMinus,
+    FaPlus,
+    FaCartPlus,
+    FaRegHeart,
+    FaAngleRight,
+    FaChevronLeft,
+    FaChevronRight,
+    FaFacebook,
+    FaTwitter,
+    FaPinterest
+} from 'react-icons/fa'
 import './productDetail.scss'
 import { Link } from 'react-router-dom'
 
 export default function ProductDetail() {
 
-    const [countCart, setCountCart] = useState(1)
-    const [imgIndex, setImgIndex] = useState(0)
+    const [countCart, setCountCart] = useState(1);
+    const [imgIndex, setImgIndex] = useState(0);
 
-    if (imgIndex >= IMAGES.length) setImgIndex(0)
+    if (imgIndex >= IMAGES.length) setImgIndex(0);
 
     
     return (
@@ -42,20 +53,19 @@ export default function ProductDetail() {
                         })}
                     </div>
                     <div className="product-slider">
-                            {IMAGES && IMAGES.map((item, index) => {
-                            return (
-                                <div className="product-big" style={{ left: `calc(${index - imgIndex}*100%)`}} key={index}>
-                                    <div className="product-big-item" >
-                                        <img
-                                            id={index}
-                                            src={item.img}
-                                            alt="" 
-                                            // onClick={() => setImgIndex(index)}
-                                        />
-                                    </div>
+                        {IMAGES && IMAGES.map((item, index) => {
+                        return (
+                            <div className="product-big" style={{ left: `calc(${index - imgIndex}*100%)`}} key={index}>
+                                <div className="product-big-item" >
+                                    <img
+                                        id={index}
+                                        src={item.img}
+                                        alt="" 
+                                    />
                                 </div>
-                                )
-                            })}
+                            </div>
+                            )
+                        })}
                         <div 
                             className="change-product left"
                             onClick={() => {
@@ -141,7 +151,7 @@ export default function ProductDetail() {
 
                 </div>
             </div>
-
+            {/* <ProductReview/> */}
         </div>
     )
 }
