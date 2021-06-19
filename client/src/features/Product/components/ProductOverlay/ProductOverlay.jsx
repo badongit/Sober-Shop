@@ -8,14 +8,18 @@ import cartApi from 'api/cartApi'
 export default function ProductOverlay(props) {
     const { product } = props;
 
-    const [loading, setLoading] = useState(false)
+    const [isWishListLoading, seTisWishListLoading] = useState(false);
+
+    const [isCartLoading, setIsCartLoading] = useState(false);
 
     const cartClick = async () => {
         try {
-            setLoading(true);
+            setIsCartLoading(true);
             const addCartData = await cartApi.add({ productId: product._id, quantity: 1 });
 
-            setLoading(false);
+            console.log(addCartData);
+
+            setIsCartLoading(false);
 
        } catch (error) {
            console.log(error.message);
@@ -23,9 +27,9 @@ export default function ProductOverlay(props) {
      }
 
     const wishlistClick = () => {
-        setLoading(2);
+        seTisWishListLoading(true);
         setTimeout(() => {
-            setLoading(0)
+            seTisWishListLoading(false)
         }, 1000);
     }
     
@@ -34,12 +38,12 @@ export default function ProductOverlay(props) {
         <div className="Product-Overlay">
             <div className="product-icon-box flex icon-cart" onClick={cartClick}>
                 {
-                    loading ? <Loading backgroundColor="#fff" /> : <FaCartPlus className="product-icon" />
+                    isCartLoading ? <Loading backgroundColor="#fff" /> : <FaCartPlus className="product-icon" />
                 }
             </div>
             <div className="product-icon-box flex icon-wishlist" onClick={wishlistClick}>
                 {
-                    loading ? <Loading backgroundColor="#fff" /> : <FaHeart className="product-icon"/>
+                    isWishListLoading ? <Loading backgroundColor="#fff" /> : <FaHeart className="product-icon"/>
                 }
             </div>
             <div className="product-icon-box flex icon-view"
