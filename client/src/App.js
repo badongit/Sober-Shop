@@ -12,16 +12,12 @@ import { getUser } from 'features/Auth/authSlice';
 import Auth from 'features/Auth';
 
 function App() {
-<<<<<<< HEAD
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getUser());
     }, [dispatch]);
     
-=======
-
->>>>>>> product
     return (
         <Router>
             <div className="App">

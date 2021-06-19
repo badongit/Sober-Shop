@@ -1,5 +1,4 @@
 .Loading {
-<<<<<<< HEAD
     width: 70px;
     text-align: center;
     margin: 0 auto;
@@ -16,20 +15,6 @@
     .bounce1 {
         animation-delay: -0.32s;
     }
-=======
-  width: 70px;
-  text-align: center;
-  margin: 0 auto;
-
-  &>div {
-      width: 10px;
-      height: 10px;
-  
-      border-radius: 100%;
-      display: inline-block;
-      animation: bouncedelay 1.4s infinite ease-in-out both;
-  }
->>>>>>> product
 
   .bounce1 {
       animation-delay: -0.32s;
