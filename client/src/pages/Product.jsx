@@ -4,6 +4,7 @@ import ProductDetail from 'features/Product/components/ProductDetail/ProductDeta
 import ProductReview from 'features/Product/components/ProductReview/ProductReview'
 
 export default function Product() {
+    
     return (
         <div className="Product">
             <Header/>

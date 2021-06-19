@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import {FaTh, FaThLarge, FaCircle, FaFilter} from 'react-icons/fa'
-// import {PRODUCT_CATEGORY as products} from '../../../constants/global'
 import ProductItem from '../../../features/Product/components/ProductItem/ProductItem';
 import RangeSlider from '../RangeSlider/RangeSlider';
 import './shop.scss'
@@ -8,6 +7,7 @@ import categoryApi from 'api/categoryApi';
 import Loading from 'components/Loading/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProduct } from 'features/Product/productSlice';
+import { Col, Container, Row } from 'reactstrap';
 
 export default function ShopBody() {
 
@@ -17,7 +17,7 @@ export default function ShopBody() {
     const [listproductItem, setListProductItem] = useState([...listProduct]);
     const [currentTab, setCurrentTab] = useState(1);
     const [gridTab, setGridTab] = useState(1)
-    const [limit, setLimit] = useState(5);
+    const [limit, setLimit] = useState(8);
     const [loading, setLoading] = useState(false);
 
     const [categories, setCategories] = useState([])
@@ -36,7 +36,6 @@ export default function ShopBody() {
     }, []);
 
     useEffect(() => {
-        
         const getProduct = async () => {
             try {
                 await dispatch(getAllProduct())
@@ -54,13 +53,22 @@ export default function ShopBody() {
             setLoading(false)
             const newListProduct = [...listproductItem, ...listProduct];
             setListProductItem(newListProduct)
-            setLimit(limit+5)
+            setLimit(limit + 4);
         },2000)
     }
 
     const limitProduct = [...listproductItem].slice(0, limit);
-    // console.log(limitProduct);
 
+    //hot product
+    const hotProduct = listproductItem.filter(product => product.sold > 40);
+    const saleProduct = listproductItem.filter(product => product.discount > 0);
+    const newProduct = listproductItem.sort().filter(product => (Date.now() - Date.parse(product.createdAt)) / (3600 * 24 * 1000) < 10)
+    console.log({ hotProduct, saleProduct, newProduct });
+
+    const limitHotProduct = [...hotProduct].slice(0, limit);
+    const limitSaleProduct = [...saleProduct].slice(0, limit);
+    const limitNewProduct = [...newProduct].slice(0, limit);
+    console.log({limitHotProduct, limitSaleProduct, limitNewProduct});
 
     return (
         <div className="ShopBody">
@@ -166,23 +174,87 @@ export default function ShopBody() {
                     </div>
 
                     {
-                        currentTab === 1 && 
-                        <div className="shopbody-products">
-                            {limitProduct.map((item,index) => {
-                                return (
-                                    <ProductItem
-                                        key={index}
-                                        product={item}
-                                        gridTab={gridTab}
-                                    />
-                                )
-                            })}
-                        </div>
+                        currentTab === 1 && (
+                            <div className="shopbody-products">
+                                <Container fluid="true" >
+                                    <Row>
+                                    {limitProduct.map((item,index) => {
+                                        return (
+                                            <Col xl="3" lg="4" >
+                                                 <ProductItem
+                                                    key={item.id}
+                                                    product={item}
+                                                />
+                                            </Col>
+                                        )
+                                    })}
+                                    </Row>
+                                </Container>
+                            </div>
+                        )
                     }
+
                     {
-                        currentTab===2 && 
-                        <p>Phuong</p>
-                    
+                        currentTab === 2 && (
+                            <div className="shopbody-products">
+                                <Container fluid="true" >
+                                    <Row>
+                                    {limitHotProduct.map((item,index) => {
+                                        return (
+                                            <Col xl="3" lg="4" >
+                                                 <ProductItem
+                                                    key={item.id}
+                                                    product={item}
+                                                />
+                                            </Col>
+                                        )
+                                    })}
+                                    </Row>
+                                </Container>
+                            </div>
+                        )
+                    }
+
+                    {
+                        currentTab === 3 && (
+                            <div className="shopbody-products">
+                                <Container fluid="true" >
+                                    <Row>
+                                    {limitNewProduct.map((item,index) => {
+                                        return (
+                                            <Col xl="3" lg="4" >
+                                                 <ProductItem
+                                                    key={item.id}
+                                                    product={item}
+                                                />
+                                            </Col>
+                                        )
+                                    })}
+                                    </Row>
+                                </Container>
+                            </div>
+                        )
+                    }
+
+                    {
+                        currentTab === 4 && (
+                            <div className="shopbody-products">
+                                <Container fluid="true" >
+                                    <Row>
+                                    {limitSaleProduct.map((item,index) => {
+                                        return (
+                                            <Col xl="3" lg="4" >
+                                                 <ProductItem
+                                                    key={item.id}
+                                                    product={item}
+                                                />
+                                            </Col>
+                                        )
+                                    })}
+                                    </Row>
+                                </Container>
+                            </div>
+                        )
                     }
 
 

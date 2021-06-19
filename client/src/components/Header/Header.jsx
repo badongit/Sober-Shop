@@ -30,7 +30,10 @@ export default function Header() {
                 <div className="header-container-right">
                     <div className="cart"><FaSearch/></div>
                     <div className="cart"><FaUser/></div>
-                    <div className="cart"><FaCartPlus/></div>
+                    <div className="cart">
+                        <FaCartPlus />
+                        <div className="number-product">0</div>
+                    </div>
                 </div>
             </div>
         </div>

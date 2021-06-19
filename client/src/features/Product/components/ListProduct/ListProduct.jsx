@@ -3,12 +3,13 @@ import ProductItem from '../ProductItem/ProductItem';
 import './listProduct.scss'
 import '../ProductItem/productItem.scss'
 import Loading from 'components/Loading/Loading';
+import { Col, Container, Row } from 'reactstrap';
 
 export default function ListProduct({product}) {
     // const { productArr: listProduct } = useSelector(state => state.products);
     // const dispatch = useDispatch();
 
-    const [limit, setLimit] = useState(10);
+    const [limit, setLimit] = useState(12);
     // const [listProductItem, setListProductItem] = useState([...listProduct])
     const [loading, setLoading] = useState(false)
     const listProductItem = product;
@@ -17,7 +18,7 @@ export default function ListProduct({product}) {
         setLoading(true);
         setTimeout(() => {
             setLoading(false)
-            setLimit(limit+5);
+            setLimit(limit+6);
         },2000)
     }
     const limitProduct = listProductItem.slice(0, limit);
@@ -27,14 +28,19 @@ export default function ListProduct({product}) {
         <div>
             <div className="BestSeller">
                 <div className="ProductItem">
-                    {limitProduct.map((item, index) => {
-                            return (
-                                <ProductItem
-                                    key={index}
-                                    product={item}
-                                />
-                            )
-                        })}
+                    <Container fluid="true" >
+                        <Row>
+                            {limitProduct.map((item,index) => {
+                                return (
+                                    <Col xl="2" lg="3" key={item._id}>
+                                        <ProductItem
+                                            product={item}
+                                        />
+                                    </Col>
+                                )
+                            })}
+                        </Row>
+                    </Container>
                 </div>
             </div>
             <div className="loadmore">

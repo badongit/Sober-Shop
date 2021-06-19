@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ProductOverlay from '../ProductOverlay/ProductOverlay'
-import './productItem.scss'
+import './productItem.scss';
+import { Redirect } from 'react-router-dom';
 
 export default function ProductItem({ product }) {
     
     const productDate = Date.parse(product.createdAt);
     const today = new Date();
+
+    const [open, setOpen] = useState(false)
+
+    const openView = () => {
+        setOpen(true);
+    }
 
     return (
         <div className="ProductItem">
@@ -29,14 +36,27 @@ export default function ProductItem({ product }) {
                     }
                     </div>
                     <div className="product-img-bg">
-                        <img src={product.thumb[0]} alt="" />
+                            <img src={product.thumb[0]} alt="" />
                         <img 
                             className="img-default hide"
                             src={product.thumb[1]}
                             alt="" 
                         />
                     </div>
-                    <ProductOverlay/>
+                    {
+                        open === false && (
+                        <ProductOverlay
+                            openView={openView}
+                            product={product}
+                        />
+                        )
+                    }
+                    {
+                        open === true && (
+                            <Redirect to="sober/products"/>
+                        )
+                    }
+                    
                 </div>
                 <div className="product-title">
                     {product.name}

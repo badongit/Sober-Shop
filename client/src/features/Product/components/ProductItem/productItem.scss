@@ -1,7 +1,7 @@
 .ProductItem {   
     width: 100%;
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
+    // display: grid;
+    // grid-template-columns: auto auto auto auto auto;
 
     .product {
     width: 100%;
@@ -40,13 +40,25 @@
             }
 
             &-bg {
+                position: relative;
                 width: 100%;
-                height: 100%;
+                display: block;
 
-                &>img {
+                &:before {
+                    content: '';
+                    display: block;
+                    width: 100%;
+                    padding-top: calc(235 / 195 * 100%);
+                    background-color: #000;
+                }
+
+                & img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
                     width: 100%;
                     height: 100%;
-                    transition: all linear;
+                    object-fit: cover;
                 }
 
                 .img-default {
@@ -63,11 +75,12 @@
 
         &:hover .img-default{
             visibility: visible;
-            transition: 0.7s ease-in-out;
+            transition: 0.7s linear;
         }
 
         &-title {
             text-align: center;
+            font-size: 13px;
             margin: 20px 0 10px 0;
         }
 

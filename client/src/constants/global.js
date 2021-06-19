@@ -54,4 +54,27 @@ export const PRODUCT_CATEGORY = [
         comment: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
         des: "A dress is a garment traditionally worn by women or girls consisting of a skirt with an attached bodice It consists of a top piece that covers the torso and hangs"
     },
-]
+];
+
+export const ENDPOINT = {
+    auth: {
+        login: '/auth/login',
+        register: '/auth/register',
+        confirm: '/auth',
+        updateInfor: '/auth',
+        changePassword: '/auth/password',
+        getAccessToken: '/auth/token',
+        logout: '/auth/logout',
+        forgetPassword: '/auth/forget-password',
+        resetPassword: '/auth/reset-password', // /auth/reset-password/:resetToken
+    },
+    order: {
+        addOrder: '/order',
+        getOrderUser: '/order/user',
+        getOrderAdmin: '/order/admin',
+        getOrder: '/order', // /order/:id
+    },
+    cart: {
+        add: '/cart',
+    }
+};

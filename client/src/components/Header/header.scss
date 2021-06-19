@@ -64,6 +64,24 @@
             .cart {
                 font-size: 20px;
                 margin-right: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .number-product {
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+
+                    background-color: #000;
+                    color: #fff;
+
+                    text-align: center;
+                    margin: auto;
+                    font-size: 12px;
+                    font-weight: bold;
+                    margin-left: 5px;
+                }
             }
         }
 
