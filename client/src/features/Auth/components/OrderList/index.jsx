@@ -11,8 +11,6 @@ function OrderList(props) {
     const [listOrder, setListOrder] = useState([]);
     const match = useRouteMatch();
 
-    console.log(match.url);
-
     useEffect(() => {
         const fetchOrder = async () => {
             try {

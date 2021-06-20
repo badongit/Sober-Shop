@@ -69,7 +69,7 @@ POST http://localhost:5000/api/auth/forget-password
 Content-Type: application/json
 
 {
-    "email": "nguyenbadong201@gmail.com"
+    "email": "nguyenbadong01@gmail.com"
 }
 
 ###

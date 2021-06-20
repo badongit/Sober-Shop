@@ -29,6 +29,15 @@ const authApi = {
     logout: () => {
         
         return axiosClient.get(ENDPOINT.auth.logout);
+    },
+    forgetPassword: (userForm) => {
+
+        return axiosClient.post(ENDPOINT.auth.forgetPassword, userForm);
+    },
+    resetPassword: (resetToken, userForm) => {
+        const url = `${ENDPOINT.auth.resetPassword}/${resetToken}`;
+
+        return axiosClient.put(url, userForm);
     }
     
 };

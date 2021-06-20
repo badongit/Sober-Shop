@@ -16,7 +16,7 @@
                 text-decoration: none;
             }
 
-            &:hover a{
+            &:hover a, &:hover button{
                 color: $text-color-black!important;
             }
 
@@ -24,6 +24,8 @@
                 background-color: transparent!important;
                 border: none!important;
                 padding: 0!important;
+                color: $text-color-grey!important;
+                box-shadow: none!important;
             }
         }
 

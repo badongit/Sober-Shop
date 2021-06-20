@@ -8,10 +8,12 @@ import { useDispatch } from 'react-redux';
 import authApi from 'api/authApi';
 import { LOCAL_STORAGE } from 'constants/global';
 import { getUser } from 'features/Auth/authSlice';
+import { useRouteMatch } from 'react-router-dom';
 
 function LoginForm(props) {
     const { select } = props;
     const dispatch = useDispatch();
+    const match = useRouteMatch();
 
     const initialValues = {
         username: '',
@@ -118,7 +120,7 @@ function LoginForm(props) {
                 }
             </Formik>
             <p className="login-form_footer">
-                <a href="/forget-password">LOST YOUR PASSWORD?</a>
+                <a href={`${match.url}/forget-password`}>LOST YOUR PASSWORD?</a>
             </p>
         </div>
     );
