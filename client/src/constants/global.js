@@ -66,7 +66,7 @@ export const ENDPOINT = {
         getAccessToken: '/auth/token',
         logout: '/auth/logout',
         forgetPassword: '/auth/forget-password',
-        resetPassword: '/auth/reset-password',
+        resetPassword: '/auth/reset-password', // /auth/reset-password/:resetToken
     },
     order: {
         addOrder: '/order',

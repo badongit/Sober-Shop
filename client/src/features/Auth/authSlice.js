@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import authApi from 'api/authApi';
+import axiosClient from 'api/axiosClient';
 import { LOCAL_STORAGE } from 'constants/global';
 import setAuthToken from 'utils/setAuthToken';
 
@@ -8,19 +9,24 @@ export const getUser = createAsyncThunk('auth/getUser', async(params, thunkAPI) 
 
     if(accessToken) {
         setAuthToken(accessToken);
-    };
 
-    const authData = await authApi.confirm();
+        const authData = await authApi.confirm();
+        console.log({ authData });
 
-    if(authData.success) {
-        thunkAPI.dispatch(confirm({ user: authData.user, isAuthenticated: true }));
+        if(authData.success) {
+            thunkAPI.dispatch(confirm({ user: authData.user, isAuthenticated: true }));
+        } else {
+            thunkAPI.dispatch(confirm({ user: null, isAuthenticated: false }));
+            setAuthToken(null);
+            localStorage.removeItem(LOCAL_STORAGE.accessToken);
+        }
+
+        return authData;
     } else {
         thunkAPI.dispatch(confirm({ user: null, isAuthenticated: false }));
-        setAuthToken(null);
-        localStorage.removeItem(LOCAL_STORAGE.accessToken);
-    }
 
-    return authData;
+        return { success: false, message: "Not found access token"};
+    }
 });
 
 const authSlice = createSlice({
@@ -37,7 +43,10 @@ const authSlice = createSlice({
             state.user = user;
             state.isAuthenticated = isAuthenticated;
         },
-
+        logout: (state) => {
+            state.user = null;
+            state.isAuthenticated = false;
+        }
     },
     extraReducers: {
         [getUser.pending]: (state) => {
@@ -56,5 +65,5 @@ const authSlice = createSlice({
 
 const { reducer, actions } = authSlice;
 
-export const { confirm } = actions;
+export const { confirm, logout } = actions;
 export default reducer;

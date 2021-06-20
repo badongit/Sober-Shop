@@ -6,11 +6,7 @@ const GenerateRefreshToken = require('../helpers/GenerateRefreshToken');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const redisClient = require('../config/redis');
-const mailgun = require('mailgun-js')({ 
-    apiKey: process.env.MAILGUN_API_KEY, 
-    domain: process.env.MAILGUN_DOMAIN, 
-});
-
+const sendMail = require('../helpers/sendMail');
 const saltRounds = 10;
 
 module.exports = {
@@ -258,23 +254,38 @@ module.exports = {
         // Everything is good
         const resetToken = jwt.sign({ userId: user._id }, process.env.RESET_TOKEN_SECRET, { expiresIn: process.env.RESET_TOKEN_EXPIRE });
 
-        const data = {
-            from: 'sobershop@hello.com',
-            to: email,
-            subject: 'Reset password for your account at Sober Shop',
-            html: `
-                <h2>Please click on given link to reset your account password at Sober Shop</h2>
-                <p>${process.env.CLIENT_URL}/auth/reset-password/${resetToken}</p>
-            `,
-        };
+        const resetUrl = `${process.env.CLIENT_URL}/user/reset-password/${resetToken}`;
 
-        mailgun.messages().send(data, function(error, body) {
-            if(error) {
-                return next(new ErrorResponse(400, error.message));
-            };
+        const message = `
+            Vui lòng click vào đây ${resetUrl} để cập nhật lại mật khẩu.
+            Link tồn tại trong 20 phút.
+        `;
 
-            res.json({ success: true, message: 'Email has been sent to the user'});
-        })
+        try {
+            await sendMail({
+              email: email,
+              subject: "Quên mật khẩu?",
+              message,
+            });
+      
+            return res.json({
+                success: true,
+                message: "Email sent.",
+            });
+
+            } catch (err) {
+                console.log(`Error send mail: ${err.message}`);
+                
+                return res.status(400).json({
+                    success: false,
+                    message: err.message,
+                });
+            }
+        
+        res.status(200).json({
+            success: true,
+            resetUrl,
+        });
     }),
 
     // @route [PUT] /api/auth/reset-password/:resetToken

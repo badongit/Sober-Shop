@@ -4,10 +4,8 @@ const authController = require('../controllers/authController');
 
 const router = express.Router();
 
-router
-    .route('/')
-    .get(verifyAccessToken, authController.confirm)
-    .put(verifyAccessToken, authController.updateInfor)
+router.get('/', verifyAccessToken, authController.confirm)
+router.put('/', verifyAccessToken, authController.updateInfor)
     
 router.put('/password', verifyAccessToken, authController.changePassword)
 router.post('/forget-password', authController.forgetPassword)

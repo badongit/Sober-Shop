@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useLocation, useRouteMatch } from 'react-router-dom';
 import './UserMenu.scss';
 
 function UserMenu(props) {
     const match = useRouteMatch();
-    const pathname = window.location.pathname;
+    const { pathname }= useLocation();
     const [select, setSelect] = useState('account')
 
     useEffect(() => {
