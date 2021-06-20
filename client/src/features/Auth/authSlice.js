@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import authApi from 'api/authApi';
-import axiosClient from 'api/axiosClient';
 import { LOCAL_STORAGE } from 'constants/global';
 import setAuthToken from 'utils/setAuthToken';
 

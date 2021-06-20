@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavBar from './navbar'
 import MenuDropDown from './MenuDropDown'
 import thumbShop from '../../assets/images/women-dropdown.jpg'
@@ -7,6 +7,23 @@ import './header.scss'
 import { Link } from 'react-router-dom';
 
 export default function Header() {
+    const [height, setHeight] = useState(() => window.scrollY);
+
+    window.onscroll = handleSroll;
+
+    function handleSroll(event) {
+        const header = document.getElementsByClassName('Header')[0];
+
+        if(window.scrollY - height > 0) {
+            if(!header.className.includes('header-notpinned')) 
+                header.className += ' header-notpinned';
+        } else {
+            if(header.className.includes('header-notpinned')) 
+                header.className = header.className.replace(' header-notpinned', '');
+        }
+
+        setHeight(window.scrollY);
+    };
 
     return (
         <div className="Header">
