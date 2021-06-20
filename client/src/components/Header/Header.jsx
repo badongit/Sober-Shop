@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from './navbar'
 import MenuDropDown from './MenuDropDown'
 import thumbShop from '../../assets/images/women-dropdown.jpg'
@@ -9,21 +9,29 @@ import { Link } from 'react-router-dom';
 export default function Header() {
     const [height, setHeight] = useState(() => window.scrollY);
 
-    window.onscroll = handleSroll;
+    
 
-    function handleSroll(event) {
-        const header = document.getElementsByClassName('Header')[0];
-
-        if(window.scrollY - height > 0) {
-            if(!header.className.includes('header-notpinned')) 
-                header.className += ' header-notpinned';
-        } else {
-            if(header.className.includes('header-notpinned')) 
-                header.className = header.className.replace(' header-notpinned', '');
+    useEffect(() => {
+        function handleScroll(event) {
+            const header = document.getElementsByClassName('Header')[0];
+    
+            if(window.scrollY - height > 0) {
+                if(!header.className.includes('header-notpinned')) 
+                    header.className += ' header-notpinned';
+            } else {
+                if(header.className.includes('header-notpinned')) 
+                    header.className = header.className.replace(' header-notpinned', '');
+            }
+    
+            setHeight(window.scrollY);
         }
+        
+        window.addEventListener('scroll', handleScroll);
 
-        setHeight(window.scrollY);
-    };
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        }
+    })
 
     return (
         <div className="Header">
