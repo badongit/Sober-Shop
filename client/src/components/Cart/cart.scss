@@ -1,0 +1,33 @@
+.Cart {
+  width: 100%;
+  padding: 0 40px;
+  margin-top: 300px;
+  margin-bottom: 100px;
+  .Carousel {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+  .main-tab-item {
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 500 !important;
+    .cart-counter {
+      color: #909097;
+      background-color: #e4e6eb;
+      font-size: 10px;
+      font-weight: 600;
+      text-align: center;
+      line-height: 20px;
+      margin: -4px 0 0 15px;
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
+      border-radius: 50%;
+    }
+    &.active .cart-counter {
+      color: #fff;
+      background-color: #23232c;
+    }
+  }
+}
