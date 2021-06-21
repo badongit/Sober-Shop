@@ -1,13 +1,15 @@
 import React from 'react'
-import Header from 'components/Header/Header'
-import Cart from 'components/Cart/Cart';
+import CartHeader from "../components/Cart/CartHeader";
+import CartBody from "../components/Cart/CartBody";
+import ProtectedRoute from "../components/routing/ProtectedRoute";
 
-export default function Product() {
-
+function Cart() {
   return (
     <div className="Cart">
-      <Header/>
-      <Cart />
+      <CartHeader />
+      <CartBody />
     </div>
   )
 }
+
+export default ProtectedRoute(Cart);

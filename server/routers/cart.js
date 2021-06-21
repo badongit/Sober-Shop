@@ -8,8 +8,10 @@ router.post('/', verifyAccessToken, permission('user'), cartController.add);
 
 router.get('/', verifyAccessToken, permission('user'), cartController.getAll);
 
+router.get('/count', verifyAccessToken, permission('user'), cartController.getCount);
+
 router.put('/', verifyAccessToken, permission('user'), cartController.updateMany);
 
-router.delete('/:productId', verifyAccessToken, permission('user'), cartController.delete);
+router.delete('/:id', verifyAccessToken, permission('user'), cartController.delete);
 
 module.exports = router;

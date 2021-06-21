@@ -1,3 +1,5 @@
+import favouriteProductApi from "../api/favouriteProductApi";
+
 export const PRODUCT_CATEGORY = [
     {
         name: "Red Hoodie",
@@ -77,7 +79,14 @@ export const ENDPOINT = {
     cart: {
         add: '/cart',
         getAll: '/cart',
+        getCount: '/cart/count',
         updateMany: '/cart',
+        delete: '/cart'
+    },
+    favouriteProduct: {
+        add: '/favouriteProduct',
+        getAll: '/favouriteProduct',
+        delete: '/favouriteProduct'
     },
 
 };

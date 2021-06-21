@@ -56,14 +56,22 @@ module.exports = {
         res.json({ success: true, carts });
     }),
 
+    getCount: asyncHandle(async (req, res, next) => {
+        const userId = req.userId;
+
+        const carts = await Cart.find({ user: userId });
+
+        res.json({ success: true, count: carts.length });
+    }),
+
     // @route [DELETE] /api/cart/:productId
     // @desc Delete product in user's cart
     // @access Only role user
     delete: asyncHandle(async (req, res, next) => {
         const userId = req.userId;
-        const productId = req.params.productId;
+        const id = req.params.id;
 
-        const deletedCart = await Cart.findOneAndDelete({ user: userId, product: productId});
+        const deletedCart = await Cart.findOneAndDelete({ user: userId, _id: id});
 
         // Check for existing product in user's cart
         if(!deletedCart) {

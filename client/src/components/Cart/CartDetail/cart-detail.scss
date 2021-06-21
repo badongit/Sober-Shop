@@ -1,12 +1,12 @@
 .cart {
   &_content {
     width: 100%;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
   }
   &_item {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
     padding: 20px 0;
     align-items: center;
   }
@@ -73,5 +73,19 @@
         background-color: #23232c;
       }
     }
+  }
+  &-counter {
+    color: #fff;
+    background-color: #23232c;
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 20px;
+    margin-left: 5px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    border-radius: 50%;
   }
 }

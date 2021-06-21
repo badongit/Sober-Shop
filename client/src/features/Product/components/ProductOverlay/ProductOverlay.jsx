@@ -5,7 +5,9 @@ import {FaCartPlus, FaHeart , FaEye} from 'react-icons/fa'
 import './productOverlay.scss'
 import '../ProductItem/productItem.scss'
 import { useHistory } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import favouriteProductApi from "api/favouriteProductApi";
+import {addCart} from "components/Cart/CartSlice";
 
 export default function ProductOverlay(props) {
     const { product } = props;
@@ -18,13 +20,14 @@ export default function ProductOverlay(props) {
 
     const [isCartLoading, setIsCartLoading] = useState(false);
 
+    const dispatch = useDispatch();
+
     const cartClick = async () => {
         try {
             setIsCartLoading(true);
 
             if (user) {
-                const addCartData = await cartApi.add({ productId: product._id, quantity: 1 });
-                console.log(addCartData);
+                await dispatch(addCart({ body: { productId: product._id, quantity: 1 } }));
             } else {
                 history.push('/user')
             }
@@ -40,12 +43,23 @@ export default function ProductOverlay(props) {
     
     
         
-    const wishlistClick = () => {
+    const wishlistClick = async () => {
+      try {
         seTisWishListLoading(true);
+        console.log(user)
 
-        setTimeout(() => {
-            seTisWishListLoading(false)
+        if (user) {
+          await favouriteProductApi.add({ product: product._id });
+        } else {
+          history.push('/user')
+        }
+      } catch (error) {
+        console.log(error.message);
+      } finally {
+        setTimeout(function () {
+          seTisWishListLoading(false);
         }, 1000);
+      }
     }
     
     const redirect = () => {

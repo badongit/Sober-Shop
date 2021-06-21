@@ -1,6 +1,7 @@
 import React from 'react'
 import ProductOverlay from '../ProductOverlay/ProductOverlay'
 import './productItem.scss';
+import {numberFormat} from "utils/common";
 
 export default function ProductItem({ product }) {
     
@@ -44,7 +45,7 @@ export default function ProductItem({ product }) {
                     {product.name}
                 </div>
                 <div className="product-price">
-                    ${product.price}.00
+                    ${numberFormat(product.price)}
                 </div>
             </div>            
         </div>

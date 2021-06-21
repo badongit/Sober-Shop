@@ -13,6 +13,7 @@ module.exports = {
     // @desc Add order and order detail
     // @access Only role user
     addOrder: asyncHandle(async (req, res, next) => {
+        console.log(req.body);
         const userId = req.userId;
         const { address, phoneNumber, carts } = req.body;
 

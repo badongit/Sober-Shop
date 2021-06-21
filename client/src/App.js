@@ -11,6 +11,7 @@ import Team from 'pages/Team';
 import Auth from 'features/Auth';
 import { useDispatch } from 'react-redux';
 import { getUser } from 'features/Auth/authSlice';
+import Checkout from "./pages/Checkout";
 
 function App() {
     const dispatch = useDispatch();
@@ -28,6 +29,7 @@ function App() {
                     <Route path="/sober/collection" component={Collection}></Route>
                     <Route path="/sober/products" component={Product}></Route>
                     <Route path="/sober/cart" component={Cart}></Route>
+                    <Route path="/sober/checkout" component={Checkout}></Route>
                     <Route path="/contact" component={Contact}></Route>
                     <Route path="/team" component={Team}></Route>
                     <Route path="/user" component={Auth} />

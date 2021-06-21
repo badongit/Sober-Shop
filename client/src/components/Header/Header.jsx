@@ -3,9 +3,28 @@ import { FaCartPlus, FaSearch, FaUser } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import './header.scss'
 import NavBar from './navbar'
+import {useDispatch, useSelector} from "react-redux";
+import ProtectedRoute from "../routing/ProtectedRoute";
+import {getCountCart} from "../Cart/CartSlice";
 
-export default function Header() {
+function Header() {
+    const dispatch = useDispatch();
+
     const [height, setHeight] = useState(() => window.scrollY);
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    const countCart = useSelector(state => state.carts.countCart);
+
+    useEffect(() => {
+        const fetchCountCarts = async () => {
+            try {
+                await dispatch(getCountCart());
+            } catch (error) {
+                console.log(error.message);
+            }
+        };
+
+        fetchCountCarts();
+    }, []);
 
     useEffect(() => {
         const header = document.getElementsByClassName('Header')[0];
@@ -61,9 +80,20 @@ export default function Header() {
                 <div className="header-container-right">
                     <div className="cart"><FaSearch/></div>
                     <div className="cart"><Link to='/user'><FaUser/></Link></div>
-                    <div className="cart"><FaCartPlus/></div>
+                    {(() => {
+                        if (isAuthenticated) {
+                            return (
+                              <div className="cart">
+                                  <Link to="/sober/cart"><FaCartPlus/></Link>
+                                  <span className="cart-counter">{countCart}</span>
+                              </div>
+                            );
+                        }
+                    })()}
                 </div>
             </div>
         </div>
     )
 }
+
+export default ProtectedRoute(Header);

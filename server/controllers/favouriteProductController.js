@@ -14,7 +14,7 @@ const sendResponse = require("../helpers/SendResponse");
 
 module.exports = {
   index: asyncHandle(async (req, res) => {
-    const favouriteProduct = await FavouriteProduct.find();
+    const favouriteProduct = await FavouriteProduct.find().populate('product');
 
     return sendResponse(
       res,
@@ -23,7 +23,11 @@ module.exports = {
     );
   }),
   create: asyncHandle(async (req, res) => {
-    const favouriteProduct = await FavouriteProduct.create(req.body);
+    const user = req.userId;
+    const favouriteProduct = await FavouriteProduct.create({
+      ...req.body,
+      user
+    });
 
     return sendResponse(
       res,
