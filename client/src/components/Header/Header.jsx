@@ -5,7 +5,6 @@ import './header.scss'
 import NavBar from './navbar'
 
 export default function Header() {
-<<<<<<< HEAD
     const [height, setHeight] = useState(() => window.scrollY);
 
     useEffect(() => {
@@ -39,10 +38,6 @@ export default function Header() {
         }
     })
 
-=======
-    const history = useHistory();
-    
->>>>>>> product
     return (
         <div className="Header">
             <div className="header-container">

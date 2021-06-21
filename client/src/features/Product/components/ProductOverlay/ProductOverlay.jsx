@@ -1,20 +1,11 @@
 import cartApi from 'api/cartApi'
 import Loading from 'components/Loading/Loading'
 import React, { useState } from 'react'
-<<<<<<< HEAD
-import { FaCartPlus, FaEye, FaHeart } from 'react-icons/fa'
-import '../ProductItem/productItem.scss'
-import './productOverlay.scss'
-=======
 import {FaCartPlus, FaHeart , FaEye} from 'react-icons/fa'
 import './productOverlay.scss'
 import '../ProductItem/productItem.scss'
-import Loading from 'components/Loading/Loading'
-import cartApi from 'api/cartApi'
 import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import Toast from '../Toast/Toast'
->>>>>>> product
 
 export default function ProductOverlay(props) {
     const { product } = props;
