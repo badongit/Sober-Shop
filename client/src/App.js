@@ -8,17 +8,17 @@ import Product from './pages/Product'
 import Cart from './pages/Cart'
 import Contact from 'pages/Contact';
 import Team from 'pages/Team';
+import Auth from 'features/Auth';
 import { useDispatch } from 'react-redux';
 import { getUser } from 'features/Auth/authSlice';
-import Auth from 'features/Auth';
 
 function App() {
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
         dispatch(getUser());
     }, [dispatch]);
-    
+   
     return (
         <Router>
             <div className="App">

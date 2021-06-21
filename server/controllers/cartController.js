@@ -1,5 +1,6 @@
 const ErrorResponse = require('../helpers/ErrorResponse');
 const asyncHandle = require('../middlewares/asyncHandle');
+const { findByIdAndUpdate } = require('../models/Cart');
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
 
@@ -94,4 +95,23 @@ module.exports = {
         res.json({ success: true, message: "The product has been updated", cart: updatedCart });
     }),
 
+    // @route [PUT] /api/cart
+    // @desc Update many cart
+    // @access private
+    updateMany: asyncHandle(async (req, res, next) => {
+        const { newCarts } = req.body;
+        const userId = req.userId;
+
+        const carts = await Promise.all(newCarts.map(async (cart) => {
+            if(cart.quantity === 0) {
+                await Cart.findByIdAndDelete(cart._id);
+                return null;
+            } else {
+                const newCart = await Cart.findByIdAndUpdate(cart._id, { quantity: cart.quantity});
+                return newCart;
+            };
+        }));
+
+        res.json({ success: true, message: "Carts has been updated"});
+    })
 };

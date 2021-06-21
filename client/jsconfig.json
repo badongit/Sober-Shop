@@ -5,4 +5,4 @@
       "baseUrl": "./src"
     },
     "include": ["src/**/*"]
-  }
+}

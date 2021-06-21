@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import IMAGES from '../../../../constants/image'
-import {PRODUCT_CATEGORY as products} from '../../../../constants/global'
+// import IMAGES from '../../../../constants/image'
+// import {PRODUCT_CATEGORY as products} from '../../../../constants/global'
 import ReactStars from 'react-rating-stars-component'
 import {
     FaMinus,
@@ -17,14 +17,14 @@ import {
 import './productDetail.scss'
 import { Link } from 'react-router-dom'
 
-export default function ProductDetail() {
+
+export default function ProductDetail({product}) {
 
     const [countCart, setCountCart] = useState(1);
     const [imgIndex, setImgIndex] = useState(0);
 
-    if (imgIndex >= IMAGES.length) setImgIndex(0);
+    if (imgIndex >= product.listImage.length) setImgIndex(0);
 
-    
     return (
         <div className="ProductDetail">
             <div className="product-leave">
@@ -32,20 +32,19 @@ export default function ProductDetail() {
                 <FaAngleRight className="arrow"/>
                 <Link to="/" className="product-link">Man</Link>
                 <FaAngleRight className="arrow"/>
-                <span className="product-name-first">{products[1].name}</span>
+                <span className="product-name-first">{product.name}</span>
             </div>
             <div className="product-detail-container">
                 <div className="product-gallery flex">
                     <div className="product-small" >
-                        {IMAGES && IMAGES.map((item,index) => {
+                        {product.listImage.map((item,index) => {
                             return (
                                 <div
                                     className={imgIndex === index ? "product-small-item product-small-item-active" : "product-small-item"}
-                                    key={index}
+                                    key={item}
                                 >
                                     <img 
-                                        onClick={() => console.log(setImgIndex(index))}
-                                        src={item.img} 
+                                        src={item} 
                                         alt="" 
                                     />
                                 </div>
@@ -53,13 +52,13 @@ export default function ProductDetail() {
                         })}
                     </div>
                     <div className="product-slider">
-                        {IMAGES && IMAGES.map((item, index) => {
+                        {product.listImage.map((item, index) => {
                         return (
                             <div className="product-big" style={{ left: `calc(${index - imgIndex}*100%)`}} key={index}>
                                 <div className="product-big-item" >
                                     <img
                                         id={index}
-                                        src={item.img}
+                                        src={item}
                                         alt="" 
                                     />
                                 </div>
@@ -77,7 +76,7 @@ export default function ProductDetail() {
                         <div 
                             className="change-product right"
                             onClick={() => {
-                                if(imgIndex < IMAGES.length && IMAGES.length) setImgIndex(imgIndex+1)
+                                if(imgIndex < product.listImage.length && product.listImage.length) setImgIndex(imgIndex+1)
                             }}
                         >
                             <FaChevronRight/>
@@ -87,14 +86,14 @@ export default function ProductDetail() {
 
                 <div className="product-info-detail">
                     <div className="product-info-title">
-                        {products[1].name}
+                       {product.name}
                     </div>
                     <div className="product-info-des">
-                        {products[1].comment}
+                        {product.description}
                     </div>
                     <div className="product-info-vote">
                         <ReactStars
-                            value={4}
+                            value={product.evaluation}
                             size={20}
                             activeColor="#ffd700"
                             className="rating"
@@ -102,8 +101,7 @@ export default function ProductDetail() {
                         <p>(0 customer reviews)</p>
                     </div>
                     <div className="product-info-price">
-                        <sup>đ</sup>
-                        {products[1].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                        ${product.price}.00
                     </div>
 
                     <div className="product-info-cart">

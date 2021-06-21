@@ -9,7 +9,7 @@
 
     font-size: 14px;
     transition: 0.35s;
-    // opacity: 0;
+    opacity: 1;
     // z-index: -1;
 
     .icon-toast {
@@ -17,4 +17,9 @@
         margin-right: 10px;
         text-align: center;
     }
+
+    // .show-toast {
+    //     opacity: 1;
+    //     z-index: 100;
+    // }
 }

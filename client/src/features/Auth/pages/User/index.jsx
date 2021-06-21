@@ -1,6 +1,7 @@
 import Header from 'components/Header/Header';
 import ProtectedRoute from 'components/routing/ProtectedRoute';
 import MyAccount from 'features/Auth/components/MyAccount';
+import UserCarts from 'features/Auth/components/UserCarts';
 import UserMenu from 'features/Auth/components/UserMenu';
 import Footer from 'layout/Footer/Footer';
 import React from 'react';
@@ -17,6 +18,7 @@ function User(props) {
                 <UserMenu />
             </div>
             <Switch>
+                <Route path={`${match.url}/carts`} component={UserCarts} />
                 <Route path={`${match.url}`} component={MyAccount} />
             </Switch>
             <Footer />

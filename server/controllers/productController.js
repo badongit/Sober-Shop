@@ -27,7 +27,7 @@ module.exports = {
 
     /*== Find if name is not empty with regex ==*/
     if (req.query.name) {
-      conditions.name = new RegExp(req.query.name, 'ig');
+      conditions.name = new RegExp(req.query.name, "ig");
     }
 
     /*== Find with price between min_price and max_price ==*/
@@ -74,5 +74,5 @@ module.exports = {
     const product = await Product.findByIdAndDelete(req.params.id);
 
     return sendResponse(res, "Delete successfully.", product);
-  }),
+  })
 };

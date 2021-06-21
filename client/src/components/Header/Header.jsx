@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import NavBar from './navbar'
-import MenuDropDown from './MenuDropDown'
-import thumbShop from '../../assets/images/women-dropdown.jpg'
-import {FaSearch, FaUser, FaCartPlus } from 'react-icons/fa'
+import { FaCartPlus, FaSearch, FaUser } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 import './header.scss'
-import { Link } from 'react-router-dom';
+import NavBar from './navbar'
 
 export default function Header() {
     const [height, setHeight] = useState(() => window.scrollY);
 
-    
-
     useEffect(() => {
-        function handleScroll(event) {
-            const header = document.getElementsByClassName('Header')[0];
+        const header = document.getElementsByClassName('Header')[0];
+
+        function handleScroll() {
     
             if(window.scrollY - height > 0) {
                 if(!header.className.includes('header-notpinned')) 
@@ -27,6 +24,14 @@ export default function Header() {
         }
         
         window.addEventListener('scroll', handleScroll);
+        
+        if(window.scrollY) {
+            if(header.className.includes('header-top')) 
+                header.className =  header.className.replace(' header-top', '');
+        } else {
+            if(!header.className.includes('header-top')) 
+                header.className += ' header-top';
+        }
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
@@ -43,7 +48,6 @@ export default function Header() {
                             <ul key={index} className="menu-item">
                                 <li>
                                     <a href={item.url}>{item.title}</a>
-                                    { item.dropdown && <MenuDropDown menuDropDown={item.dropdown} image={thumbShop}/>}
                                 </li>
                             </ul>
                         )
