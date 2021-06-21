@@ -6,7 +6,15 @@ const cartApi = {
 
         return axiosClient.post(ENDPOINT.cart.add, cartForm);
     },
+    getAll: () => {
 
+        return axiosClient.get(ENDPOINT.cart.getAll);
+    },
+    updateMany: (cartForm) => {
+
+        return axiosClient.put(ENDPOINT.cart.updateMany, cartForm);
+    },
+    
 };
 
 export default cartApi;

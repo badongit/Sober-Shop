@@ -10,7 +10,6 @@ export const getUser = createAsyncThunk('auth/getUser', async(params, thunkAPI) 
         setAuthToken(accessToken);
 
         const authData = await authApi.confirm();
-        console.log({ authData });
 
         if(authData.success) {
             thunkAPI.dispatch(confirm({ user: authData.user, isAuthenticated: true }));

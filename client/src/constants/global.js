@@ -76,7 +76,10 @@ export const ENDPOINT = {
     },
     cart: {
         add: '/cart',
-    }
+        getAll: '/cart',
+        updateMany: '/cart',
+    },
+
 };
 
 export const LOCAL_STORAGE = {
