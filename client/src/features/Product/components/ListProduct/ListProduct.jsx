@@ -6,11 +6,8 @@ import Loading from 'components/Loading/Loading';
 import { Col, Container, Row } from 'reactstrap';
 
 export default function ListProduct({product}) {
-    // const { productArr: listProduct } = useSelector(state => state.products);
-    // const dispatch = useDispatch();
 
     const [limit, setLimit] = useState(12);
-    // const [listProductItem, setListProductItem] = useState([...listProduct])
     const [loading, setLoading] = useState(false)
     const listProductItem = product;
 
@@ -22,7 +19,7 @@ export default function ListProduct({product}) {
         },2000)
     }
     const limitProduct = listProductItem.slice(0, limit);
-    console.log(limitProduct);
+    // console.log(limitProduct);
 
     return (
         <div>
@@ -32,7 +29,7 @@ export default function ListProduct({product}) {
                         <Row>
                             {limitProduct.map((item,index) => {
                                 return (
-                                    <Col xl="2" lg="3" key={item._id}>
+                                    <Col sm="4" lg="2" key={item._id}>
                                         <ProductItem
                                             product={item}
                                         />
