@@ -14,10 +14,10 @@ module.exports = {
     // @access Only role user
     addOrder: asyncHandle(async (req, res, next) => {
         const userId = req.userId;
-        const { address, phoneNumber, totalAmount, carts } = req.body;
+        const { address, phoneNumber, carts } = req.body;
 
         // Simple validation
-        if(!(address && phoneNumber && totalAmount && carts)) {
+        if(!(address && phoneNumber && carts)) {
             return next(new ErrorResponse(400, 'Lack of information'));
         }
 
@@ -28,7 +28,6 @@ module.exports = {
         try {
             const options = { session };
 
-            // Check user's account balance 
             const user = await User.findOne({ _id: userId }, null, options);
 
             if(!user) {
@@ -38,16 +37,9 @@ module.exports = {
                 return next(new ErrorResponse(404, 'User not found'));
             }
 
-            if(user.accountBalance < totalAmount) {
-                await session.abortTransaction();
-                session.endSession();
-
-                return next(new ErrorResponse(400, "User's account balance is not enough for payment"));
-            }
-
             // Check for existing product in user's cart and delete them
             const productsInCart = await Promise.all(carts.map(async cartId => {
-                const cart = await Cart.findByIdAndDelete(cartId, options).populate('product');
+                const cart = await Cart.findOneAndDelete({ _id: cartId, user: userId }, options).populate('product');
 
                 const product = await Product.findById(cart.product._id, null, options);
                 product.sold += cart.quantity;
@@ -55,6 +47,21 @@ module.exports = {
 
                 return cart;
             }));
+
+            const totalAmount = productsInCart.reduce((total, cart) => {
+                const { quantity, product } = cart;
+                const { price, discount } = product;
+                
+                return total + quantity * (price * ((100 - discount)/100));
+            }, 0)
+
+            // Check user's account balance 
+            if(user.accountBalance < totalAmount) {
+                await session.abortTransaction();
+                session.endSession();
+
+                return next(new ErrorResponse(400, "User's account balance is not enough for payment"));
+            }
 
             const order = await Order.create([{
                 user: userId,
@@ -114,7 +121,7 @@ module.exports = {
     getOrderUser: asyncHandle(async (req, res, next) => {
         const userId = req.userId;
 
-        const orders = await Order.find({ user: userId }).populate({ path: 'orderDetails', populate: 'product'});
+        const orders = await Order.find({ user: userId }).populate({ path: 'orderDetails', populate: 'product'}).populate('user');
 
         res.json({ success: true, orders });
     }),
@@ -123,8 +130,23 @@ module.exports = {
     // @desc Get all order in database
     // @access Only role admin
     getAllOrders: asyncHandle(async (req, res, next) => {
-        const orders = await Order.find({}).populate({ path: 'orderDetails', populate: 'product' });
+        const orders = await Order.find({}).populate({ path: 'orderDetails', populate: 'product' }).populate('user');
 
         res.json({ success: true, orders });
     }),
+
+    // @route [GET] /api/order/:id
+    // @desc Get order by id
+    // @access Private
+    getOrder: asyncHandle(async (req, res, next) => {
+        const orderId = req.params.id;
+
+        const order = await Order.findById(orderId).populate({ path: 'orderDetails', populate: 'product' }).populate('user');
+
+        if(!order) 
+            return next(new ErrorResponse(404, 'Not found order'));
+
+        res.json({ success: true, order });
+    }),
+
 };

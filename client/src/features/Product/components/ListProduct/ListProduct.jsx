@@ -1,65 +1,59 @@
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import ProductItem from '../ProductItem/ProductItem';
-// import {PRODUCT_CATEGORY} from '../../../../constants/global'
 import './listProduct.scss'
 import '../ProductItem/productItem.scss'
 import Loading from 'components/Loading/Loading';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllProduct } from 'features/Product/productSlice';
+import { Col, Container, Row } from 'reactstrap';
 
-export default function ListProduct() {
-    const { productArr: listProduct, productLoading } = useSelector(state => state.products);
-    const dispatch = useDispatch();
+export default function ListProduct({product}) {
+    // const { productArr: listProduct } = useSelector(state => state.products);
+    // const dispatch = useDispatch();
 
-    const [limit, setLimit] = useState(5);
-    const [listProductItem, setListProductItem] = useState([...listProduct])
-
-    useEffect(() => {
-        const getProduct = async () => {
-            try {
-                await dispatch(getAllProduct());
-                
-            } catch (error) {
-                console.log('Failed to get product list', error);
-            }
-        }
-        
-        getProduct();
-    }, [dispatch])
+    const [limit, setLimit] = useState(12);
+    // const [listProductItem, setListProductItem] = useState([...listProduct])
+    const [loading, setLoading] = useState(false)
+    const listProductItem = product;
 
     const handleClickIncrease = () => {
+        setLoading(true);
         setTimeout(() => {
-            const newListProduct = [...listProductItem, ...listProduct];
-            setListProductItem(newListProduct)
-            setLimit(limit+5)
+            setLoading(false)
+            setLimit(limit+6);
         },2000)
     }
-    const limitProduct = [...listProductItem].slice(0, limit)
+    const limitProduct = listProductItem.slice(0, limit);
     console.log(limitProduct);
 
-    const renderListProduct = productLoading ? <Loading/> : (
-        <div className="BestSeller">
-            <div className="ProductItem">
-                {limitProduct.map((item, index) => {
-                        return (
-                            <ProductItem
-                                key={index}
-                                product={item}
-                            />
-                        )
-                    })}
-            </div>
-        </div>
-    )
-
     return (
-        <div> 
-            { renderListProduct }
+        <div>
+            <div className="BestSeller">
+                <div className="ProductItem">
+                    <Container fluid="true" >
+                        <Row>
+                            {limitProduct.map((item,index) => {
+                                return (
+                                    <Col xl="2" lg="3" key={item._id}>
+                                        <ProductItem
+                                            product={item}
+                                        />
+                                    </Col>
+                                )
+                            })}
+                        </Row>
+                    </Container>
+                </div>
+            </div>
             <div className="loadmore">
-                <div className="loadmore-btn" onClick={handleClickIncrease}>
-                    <span>Load More</span> 
-                    {productLoading &&
-                        <div className="loadmore-loading">
+                <div className="loadmore-btn">
+                    {
+                        loading === false &&
+                        <div className="loadmore-btn-text btn" onClick={handleClickIncrease}>
+                            Load more
+                        </div>
+                    }
+                    {
+                        loading === true &&
+                        <div className="loadmore-loading btn">
                             <Loading/>
                         </div>
                     }

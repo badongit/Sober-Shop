@@ -4,12 +4,20 @@ import React from 'react';
 import { Button, FormGroup } from 'reactstrap';
 import * as Yup from 'yup';
 import Loading from 'components/Loading/Loading';
+import authApi from 'api/authApi';
+import { LOCAL_STORAGE } from 'constants/global';
+import { useDispatch } from 'react-redux';
+import { getUser } from 'features/Auth/authSlice';
 
 function RegisterForm(props) {
-    const { onSubmit, select } = props;
+    const { select } = props;
+    const dispatch = useDispatch();
+
     const initialValues = {
         username: '',
+        email: '',
         password: '',
+        confirmPassword: '',
     };
 
     const style = select === 'register' ? {
@@ -20,24 +28,60 @@ function RegisterForm(props) {
         opacity: '0',
     };
 
+    const handleSubmit = async (values, actions) => {
+        try {
+            const registerData = await authApi.register(values);
+
+            if(registerData.success) {
+                localStorage.setItem(LOCAL_STORAGE.accessToken, registerData.accessToken);
+                localStorage.setItem(LOCAL_STORAGE.refreshToken, registerData.refreshToken);
+
+                await dispatch(getUser());
+
+            } else {
+                console.log(registerData.message);
+                
+                actions.resetForm({
+                    values: {
+                        username: values.username,
+                        email: values.email,
+                        password: '',
+                        confirmPassword: '',
+                    },
+                    errors: {
+                        username: registerData.message,
+                    },
+                    touched: {
+                        username: true,
+                    },
+                });
+
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
+    };
+
     const validationSchema = Yup.object().shape({
         username: Yup.string()
             .required("Username is required.")
+            .min(8, 'Minimum of 8 characters')
+            .max(20, 'Maximum of 20 characters')
             .matches(
                 /^[a-zA-Z]{1}[a-zA-Z0-9_]{7,19}$/,
-                "8 to 20 characters long and contains no special characters."
+                "Username is not allowed to contain special characters"
             ),
         email: Yup.string()
             .required('')
-            .matches(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                "This is not an email"
-            ),
+            .email('This is not an email'),
         password: Yup.string()
-            .required("Password is required.")
+            .required("Enter your password")
+            .min(8, 'Minimum of 8 characters')
+            .max(20, 'Maximum of 20 characters')
             .matches(
                 /^(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/,
-                "At least eight characters and contain one special character."
+                "Must have at least 1 special character"
             ),
         confirmPassword: Yup.string()
             .required('')
@@ -48,7 +92,7 @@ function RegisterForm(props) {
         <div className="login-form form-register" style={ style }>
             <Formik
                 initialValues={initialValues}
-                onSubmit={onSubmit}
+                onSubmit={handleSubmit}
                 validationSchema={validationSchema}
             >
                 {

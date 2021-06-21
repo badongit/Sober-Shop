@@ -13,7 +13,7 @@ export default function TheTeam() {
         {
             name: "Minh Phương Đỗ",
             nickname: "Min",
-            avatar: "https://scontent.fhan4-1.fna.fbcdn.net/v/t1.15752-9/176826326_1116961348791760_1208504168411381082_n.jpg?_nc_cat=105&ccb=1-3&_nc_sid=ae9488&_nc_ohc=EswV6q4iVy8AX8PobL5&_nc_ht=scontent.fhan4-1.fna&oh=4f08cdefc2160d657a031335e9b63d79&oe=60DA9750"
+            avatar: "https://scontent-hkt1-2.xx.fbcdn.net/v/t1.15752-9/176826326_1116961348791760_1208504168411381082_n.jpg?_nc_cat=105&ccb=1-3&_nc_sid=ae9488&_nc_ohc=edfoKtifXj8AX_TWhpj&_nc_ht=scontent-hkt1-2.xx&oh=4b3a8205a147dfa996f8dc48d54f932b&oe=60CEB9D0"
         },
         {
             name: "Nguyễn Mai Phương",

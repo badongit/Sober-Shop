@@ -8,7 +8,7 @@ router.post('/', verifyAccessToken, permission('user'), cartController.add);
 
 router.get('/', verifyAccessToken, permission('user'), cartController.getAll);
 
-router.patch('/', verifyAccessToken, permission('user'), cartController.update);
+router.put('/', verifyAccessToken, permission('user'), cartController.updateMany);
 
 router.delete('/:productId', verifyAccessToken, permission('user'), cartController.delete);
 

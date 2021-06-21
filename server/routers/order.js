@@ -10,4 +10,6 @@ router.get('/user', verifyAccessToken, permission('user'), orderController.getOr
 
 router.get('/admin', verifyAccessToken, permission('admin'), orderController.getAllOrders);
 
+router.get('/:id', verifyAccessToken, orderController.getOrder);
+
 module.exports = router;

@@ -6,11 +6,7 @@ const GenerateRefreshToken = require('../helpers/GenerateRefreshToken');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const redisClient = require('../config/redis');
-const mailgun = require('mailgun-js')({ 
-    apiKey: process.env.MAILGUN_API_KEY, 
-    domain: process.env.MAILGUN_DOMAIN, 
-});
-
+const sendMail = require('../helpers/sendMail');
 const saltRounds = 10;
 
 module.exports = {
@@ -115,22 +111,48 @@ module.exports = {
         res.json({ success: true, user });
     }),
 
-    // @route [PATCH] /api/auth
+    // @route [PUT] /api/auth
     // @desc Update user information 
     // @access Private
     updateInfor: asyncHandle(async (req, res, next) => {
-        const user = await User.findByIdAndUpdate(req.userId, { ...req.body }, { new: true }).select('-password');
-
+        
+        const user = await User.findById(req.userId).select('-password');
+                
         // Check for existing user
         if(!user) {
             return next(new ErrorResponse(404, 'User not exist'));
         } 
 
+        const { 
+            fullname = user.fullname,
+            phoneNumber = user.phoneNumber, 
+            email = user.email, 
+            address = user.address, 
+            money = 0, 
+        } = req.body;
+
+        // Check for existing email
+        if(email !== user.email) {
+            const userWithEmail = await User.findOne({ email });
+
+            if(userWithEmail)
+                return next(new ErrorResponse(400, 'This email is taken'));
+        } 
+
         // Everything is good
+
+        user.fullname = fullname;
+        user.phoneNumber = phoneNumber;
+        user.email = email;
+        user.address = address;
+        user.accountBalance = user.accountBalance + (+money);
+
+        await user.save();
+
         res.json({ success: true, user });
     }),
 
-    // @route [PATCH] api/auth/password
+    // @route [PUT] api/auth/password
     // @desc Change password
     // @access Private
     changePassword: asyncHandle(async (req, res, next) => {
@@ -232,26 +254,41 @@ module.exports = {
         // Everything is good
         const resetToken = jwt.sign({ userId: user._id }, process.env.RESET_TOKEN_SECRET, { expiresIn: process.env.RESET_TOKEN_EXPIRE });
 
-        const data = {
-            from: 'sobershop@hello.com',
-            to: email,
-            subject: 'Reset password for your account at Sober Shop',
-            html: `
-                <h2>Please click on given link to reset your account password at Sober Shop</h2>
-                <p>${process.env.CLIENT_URL}/auth/reset-password/${resetToken}</p>
-            `,
-        };
+        const resetUrl = `${process.env.CLIENT_URL}/user/reset-password/${resetToken}`;
 
-        mailgun.messages().send(data, function(error, body) {
-            if(error) {
-                return next(new ErrorResponse(400, error.message));
-            };
+        const message = `
+            Vui lòng click vào đây ${resetUrl} để cập nhật lại mật khẩu.
+            Link tồn tại trong 20 phút.
+        `;
 
-            res.json({ success: true, message: 'Email has been sent to the user'});
-        })
+        try {
+            await sendMail({
+              email: email,
+              subject: "Quên mật khẩu?",
+              message,
+            });
+      
+            return res.json({
+                success: true,
+                message: "Email sent.",
+            });
+
+            } catch (err) {
+                console.log(`Error send mail: ${err.message}`);
+                
+                return res.status(400).json({
+                    success: false,
+                    message: err.message,
+                });
+            }
+        
+        res.status(200).json({
+            success: true,
+            resetUrl,
+        });
     }),
 
-    // @route [PATCH] /api/auth/reset-password/:resetToken
+    // @route [PUT] /api/auth/reset-password/:resetToken
     // @desc Reset password with email
     // @access public
     resetPassword: asyncHandle(async (req, res, next) => {
