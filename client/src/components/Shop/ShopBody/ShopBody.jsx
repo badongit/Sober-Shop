@@ -11,7 +11,8 @@ import { Col, Container, Row } from 'reactstrap';
 
 export default function ShopBody() {
 
-    const {productArr: listProduct} = useSelector(state => state.products)
+    const { productArr: listProduct } = useSelector(state => state.products)
+    const productLoading = useSelector(state => state.products.productLoading)
     const dispatch = useDispatch()
 
     const [listproductItem, setListProductItem] = useState([...listProduct]);
@@ -60,15 +61,15 @@ export default function ShopBody() {
     const limitProduct = [...listproductItem].slice(0, limit);
 
     //hot product
-    const hotProduct = listproductItem.filter(product => product.sold > 40);
+    const hotProduct = listproductItem.filter(product => product.sold >= 40);
     const saleProduct = listproductItem.filter(product => product.discount > 0);
     const newProduct = listproductItem.sort().filter(product => (Date.now() - Date.parse(product.createdAt)) / (3600 * 24 * 1000) < 10)
-    console.log({ hotProduct, saleProduct, newProduct });
+    // console.log({ hotProduct, saleProduct, newProduct });
 
     const limitHotProduct = [...hotProduct].slice(0, limit);
     const limitSaleProduct = [...saleProduct].slice(0, limit);
     const limitNewProduct = [...newProduct].slice(0, limit);
-    console.log({limitHotProduct, limitSaleProduct, limitNewProduct});
+    // console.log({limitHotProduct, limitSaleProduct, limitNewProduct});
 
     return (
         <div className="ShopBody">
@@ -174,13 +175,14 @@ export default function ShopBody() {
                     </div>
 
                     {
-                        currentTab === 1 && (
+                        currentTab === 1 && (productLoading ? <Loading backgroundColor="black" /> :
+                        (
                             <div className="shopbody-products">
                                 <Container fluid="true" >
                                     <Row>
                                     {limitProduct.map((item,index) => {
                                         return (
-                                            <Col xl="3" lg="4" >
+                                            <Col md="4" lg="3" >
                                                  <ProductItem
                                                     key={item.id}
                                                     product={item}
@@ -191,7 +193,7 @@ export default function ShopBody() {
                                     </Row>
                                 </Container>
                             </div>
-                        )
+                        ))
                     }
 
                     {
@@ -201,7 +203,7 @@ export default function ShopBody() {
                                     <Row>
                                     {limitHotProduct.map((item,index) => {
                                         return (
-                                            <Col xl="3" lg="4" >
+                                            <Col md="4" lg="3" >
                                                  <ProductItem
                                                     key={item.id}
                                                     product={item}
@@ -222,7 +224,7 @@ export default function ShopBody() {
                                     <Row>
                                     {limitNewProduct.map((item,index) => {
                                         return (
-                                            <Col xl="3" lg="4" >
+                                            <Col md="4" lg="3" >
                                                  <ProductItem
                                                     key={item.id}
                                                     product={item}
@@ -243,7 +245,7 @@ export default function ShopBody() {
                                     <Row>
                                     {limitSaleProduct.map((item,index) => {
                                         return (
-                                            <Col xl="3" lg="4" >
+                                            <Col md="4" lg="3" >
                                                  <ProductItem
                                                     key={item.id}
                                                     product={item}
@@ -256,7 +258,6 @@ export default function ShopBody() {
                             </div>
                         )
                     }
-
 
                     <div className="loadmore">
                         <div className="loadmore-btn" onClick={handleClickIncrease}>

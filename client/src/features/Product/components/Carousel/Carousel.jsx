@@ -21,11 +21,11 @@ export default function Carousel() {
 
     const saleProduct = productArr.filter(product => product.discount > 0);
 
-    console.log({ saleProduct });
+    // console.log({ saleProduct });
     
     const newProduct = productArr.filter(product => (Date.now() - Date.parse(product.createdAt)) / (1000 * 3600 * 24) < 10);
 
-    console.log({ newProduct });
+    // console.log({ newProduct });
 
     return (
         <div className="Carousel">
