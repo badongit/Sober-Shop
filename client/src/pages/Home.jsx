@@ -15,7 +15,7 @@ export default function Home() {
             <RecommendBanner/>
             <Carousel/>
             <New />
-            <Toast/>
+            {/* <Toast/> */}
             <Footer/>
         </div>
     )
