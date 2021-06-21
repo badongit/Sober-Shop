@@ -16,4 +16,8 @@ router
   .put(verifyAccessToken, permission("admin"), productController.update)
   .delete(verifyAccessToken, permission("admin"), productController.delete);
 
+router
+  .route("/test")
+  .post(verifyAccessToken, permission("admin"), productController.test);
+
 module.exports = router;
