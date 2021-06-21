@@ -3,7 +3,7 @@ import { LOCAL_STORAGE } from 'constants/global';
 import { logout } from 'features/Auth/authSlice';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, Route, Switch, useHistory, useLocation, useRouteMatch } from 'react-router-dom';
+import { Link, Route, Switch, useLocation, useRouteMatch } from 'react-router-dom';
 import { Button, Col, Container, Row } from 'reactstrap';
 import setAuthToken from 'utils/setAuthToken';
 import AccountDetails from '../AccountDetail';
@@ -15,7 +15,6 @@ import './MyAccount.scss';
 function MyAccount(props) {
     const match = useRouteMatch();
     const dispatch = useDispatch();
-    const history = useHistory();
     const [select, setSelect] = useState('detail');
     const { pathname } = useLocation();
 

@@ -2,8 +2,7 @@
     top: 0;
     position: fixed;
     width: 100%;
-    // background-color: rgba(204, 204, 204, 0);
-    background-color: #fff!important;
+    background-color: #fff;
     z-index: 1000;
     transition: all 0.35s ease-in-out;
 
@@ -89,18 +88,28 @@
     }
 
     &:hover {
-        background-color: #fff;
+        background-color: #fff!important;
     }
 }
 
 
 .MenuDropDown {
-    background-color: #000;
+    background-color: #fff;
     position: absolute;
     width: 500px;
-    top: 100%;
+    top: 85px;
     left: 0;
     display: none;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: -45px;
+        left: 0;
+        height: 45px;
+        width: 100%;
+        background-color: transparent;
+    }
 
     h3 {
         color: #909097;
@@ -151,5 +160,8 @@
 
 .header-notpinned {
     top: -150px!important;
-    // background-color: #fff!important;
+}
+
+.header-top {
+    background-color: rgba(255, 255, 255, 0)!important;
 }
