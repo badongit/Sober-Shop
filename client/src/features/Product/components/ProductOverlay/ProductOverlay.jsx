@@ -5,7 +5,9 @@ import {FaCartPlus, FaHeart , FaEye} from 'react-icons/fa'
 import './productOverlay.scss'
 import '../ProductItem/productItem.scss'
 import { useHistory } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import favouriteProductApi from "api/favouriteProductApi";
+import {addCart} from "components/Cart/CartSlice";
 import favoriteProductApi from 'api/favoriteProductApi'
 
 export default function ProductOverlay(props) {
@@ -19,21 +21,19 @@ export default function ProductOverlay(props) {
 
     const [isCartLoading, setIsCartLoading] = useState(false);
 
+    const dispatch = useDispatch();
+
     const cartClick = async () => {
         try {
             setIsCartLoading(true);
 
             if (user) {
-                const addCartData = await cartApi.add({ productId: product._id, quantity: 1 });
-                console.log(addCartData);
+                await dispatch(addCart({ body: { productId: product._id, quantity: 1 } }));
             } else {
                 history.push('/user')
             }
 
-            setTimeout(() => {
-               setIsCartLoading(false);
-            }, 1000);
-            
+               setIsCartLoading(false);       
        } catch (error) {
            console.log(error.message);
        }

@@ -1,11 +1,34 @@
+import cartApi from 'api/cartApi'
 import React, { useEffect, useState } from 'react'
 import { FaCartPlus, FaSearch, FaUser } from 'react-icons/fa'
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
 import './header.scss'
 import NavBar from './navbar'
 
-export default function Header() {
+function Header() {
+    const dispatch = useDispatch();
+
     const [height, setHeight] = useState(() => window.scrollY);
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    const [countCart, setCountCart] = useState(0);
+
+    useEffect(() => {
+        const fetchCountCarts = async () => {
+            if (isAuthenticated) {
+                try {
+                    const countData = await cartApi.getCount();
+
+                    if (countData.success)
+                        setCountCart(countData.count);
+                } catch (error) {
+                    console.log(error.message);
+                }
+            }
+        };
+
+        fetchCountCarts();
+    }, [dispatch, isAuthenticated]);
 
     useEffect(() => {
         const header = document.getElementsByClassName('Header')[0];
@@ -61,9 +84,14 @@ export default function Header() {
                 <div className="header-container-right">
                     <div className="cart"><FaSearch/></div>
                     <div className="cart"><Link to='/user'><FaUser/></Link></div>
-                    <div className="cart"><FaCartPlus/></div>
+                    <div className="cart">
+                        <Link to="/sober/cart"><FaCartPlus/></Link>
+                        <span className="cart-counter">{countCart}</span>
+                    </div>
                 </div>
             </div>
         </div>
     )
 }
+
+export default Header;

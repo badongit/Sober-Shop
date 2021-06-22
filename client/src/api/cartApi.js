@@ -10,10 +10,15 @@ const cartApi = {
 
         return axiosClient.get(ENDPOINT.cart.getAll);
     },
+    getCount: () => {
+        return axiosClient.get(ENDPOINT.cart.getCount);
+    },
     updateMany: (cartForm) => {
-
         return axiosClient.put(ENDPOINT.cart.updateMany, cartForm);
     },
+    delete: (cartId) => {
+        return axiosClient.delete(`${ENDPOINT.cart.delete}/${cartId}`);
+    }
     
 };
 

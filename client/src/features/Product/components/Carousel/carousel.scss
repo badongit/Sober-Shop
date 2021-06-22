@@ -8,12 +8,15 @@
         align-items: center;
         margin-bottom: 50px;
 
-        & p {
+        & p,
+        & > a {
             position: relative;
             font-size: 18px;
             font-weight: bold;
             margin: 0 25px;
             color: rgb(113, 113, 119);
+            cursor: pointer;
+            text-decoration: none;
 
             &:hover {
                 color: #000;
