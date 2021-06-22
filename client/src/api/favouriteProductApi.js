@@ -9,7 +9,7 @@ const favouriteProductApi = {
     return axiosClient.post(ENDPOINT.favouriteProduct.add, data);
   },
   delete: id => {
-    return axiosClient.delete(`${ENDPOINT.favouriteProduct.delete}/${id}`);
+    return axiosClient.delete(`/favouriteProduct/${id}`);
   }
 }
 

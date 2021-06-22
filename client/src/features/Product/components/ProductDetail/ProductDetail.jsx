@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import ReactStars from 'react-rating-stars-component'
 import {
     FaMinus, FaPlus, FaCartPlus, FaRegHeart,
@@ -22,12 +22,11 @@ export default function ProductDetail({product}) {
         try {
             const cart = await cartApi.add({ productId: product._id, quantity: countCart })
             console.log(cart);
+
         } catch (error) {
             console.log(error);
-        }
-        
+        }   
     }
-
 
     const handleChangeImageIndex = (index) => {
         if (index >= listImage.length)

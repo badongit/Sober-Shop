@@ -5,7 +5,6 @@ import Banner from '../components/Banner/Main/Banner'
 import RecommendBanner from '../components/Banner/RecommendBanner/RecommendBanner'
 import Header from '../components/Header/Header'
 import Carousel from '../features/Product/components/Carousel/Carousel'
-import Toast from 'features/Product/components/Toast/Toast'
 
 export default function Home() {
     return (
@@ -15,7 +14,6 @@ export default function Home() {
             <RecommendBanner/>
             <Carousel/>
             <New />
-            {/* <Toast/> */}
             <Footer/>
         </div>
     )

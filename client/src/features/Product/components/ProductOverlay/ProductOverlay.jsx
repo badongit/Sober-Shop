@@ -1,14 +1,12 @@
-import cartApi from 'api/cartApi'
+import favoriteProductApi from 'api/favoriteProductApi'
+import { addCart } from "components/Cart/CartSlice"
 import Loading from 'components/Loading/Loading'
 import React, { useState } from 'react'
-import {FaCartPlus, FaHeart , FaEye} from 'react-icons/fa'
-import './productOverlay.scss'
-import '../ProductItem/productItem.scss'
+import { FaCartPlus, FaEye, FaHeart } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import {useDispatch, useSelector} from 'react-redux'
-import favouriteProductApi from "api/favouriteProductApi";
-import {addCart} from "components/Cart/CartSlice";
-import favoriteProductApi from 'api/favoriteProductApi'
+import '../ProductItem/productItem.scss'
+import './productOverlay.scss'
 
 export default function ProductOverlay(props) {
     const { product } = props;
@@ -32,8 +30,10 @@ export default function ProductOverlay(props) {
             } else {
                 history.push('/user')
             }
-
-               setIsCartLoading(false);       
+            setTimeout(() => {
+               setIsCartLoading(false);  
+            }, 1000);
+            
        } catch (error) {
            console.log(error.message);
        }
@@ -49,8 +49,10 @@ export default function ProductOverlay(props) {
             
             if (!wishListData.success)
                 console.log(wishListData.message);
-            
+            setTimeout(() => {
             setIsWishListLoading(false);
+            }, 1000);
+
         } catch (error) {
             console.log(error.message);
         }

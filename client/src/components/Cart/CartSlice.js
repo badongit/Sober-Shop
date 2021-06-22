@@ -21,6 +21,7 @@ export const deleteWishList = createAsyncThunk(ENDPOINT.favouriteProduct.delete,
     thunkAPI.dispatch(removeWishList(response.data._id));
   }
 
+  console.log(response.data._id);
   return response;
 });
 

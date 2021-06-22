@@ -4,6 +4,7 @@ import Loading from "../Loading/Loading";
 import {useDispatch, useSelector} from "react-redux";
 import {addOrder, getAllCarts} from "../Cart/CartSlice";
 import {useHistory} from "react-router-dom";
+import { getUser } from 'features/Auth/authSlice';
 
 export default function CheckoutForm() {
   const [isBtnLoading, setBtnLoading] = useState(false);
@@ -46,15 +47,16 @@ export default function CheckoutForm() {
     try {
       const checkoutData = await dispatch(addOrder({ body: { ...formData, carts } }));
 
-      if (checkoutData.payload.success)
+      if (checkoutData.payload.success) {
+        await dispatch(getUser());
         history.push('/');
-      else
+      } else {
+        setBtnLoading(false);
         setErrorSubmit(checkoutData.payload.message);
+      }
     } catch (error) {
       console.log(error.message);
-    } finally {
-      setBtnLoading(false);
-    }
+    } 
   }
 
   return (

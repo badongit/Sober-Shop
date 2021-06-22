@@ -1,4 +1,4 @@
-import cartApi from 'api/cartApi'
+import { getCountCart } from 'components/Cart/CartSlice'
 import React, { useEffect, useState } from 'react'
 import { FaCartPlus, FaSearch, FaUser } from 'react-icons/fa'
 import { useDispatch, useSelector } from "react-redux"
@@ -11,19 +11,12 @@ function Header() {
 
     const [height, setHeight] = useState(() => window.scrollY);
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-    const [countCart, setCountCart] = useState(0);
+    const countCart = useSelector(state => state.carts.countCart);
 
     useEffect(() => {
         const fetchCountCarts = async () => {
             if (isAuthenticated) {
-                try {
-                    const countData = await cartApi.getCount();
-
-                    if (countData.success)
-                        setCountCart(countData.count);
-                } catch (error) {
-                    console.log(error.message);
-                }
+                await dispatch(getCountCart());
             }
         };
 

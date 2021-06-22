@@ -21,7 +21,7 @@ export default function Wishlist(props) {
       await cartApi.add({ productId: product._id, quantity: 1 });
 
       await dispatch(getAllCarts());
-      
+
       setIsCartLoading(null);
 
     } catch (error) {
@@ -43,30 +43,35 @@ export default function Wishlist(props) {
     <div>
       <div className="wishlist_content">
         {
-          props.data.map((item, key) => {
-            return (
-              <div className="wishlist_item" key={key}>
-                <div className="wishlist_info">
-                  <Link to="#" onClick={() => handleDelete(item._id)}>
-                    <FaTimes color="#212529" fontSize={18} />
-                  </Link>
-                  <img src={ item.product.thumb[0] } alt={ item.product.name } />
-                  <span className="wishlist_info_name">{ item.product.name }</span>
-                </div>
-                <div className="wishlist_price">${ numberFormat(item.product.price) }</div>
-                <div className="wishlist_action">
-                  <a href="#" className="button_checkout" onClick={() => handleAddToCart(item)}>
-                    <span className="button_checkout-subtotal">
-                      {
-                        isCartLoading === item._id ? <Loading backgroundColor="#fff" /> : <span>Add to cart</span>
-                      }
-                    </span>
-                  </a>
-                </div>
-              </div>
-            );
-          })
-        }
+          props.data.length ? 
+            (
+              props.data.map((item, key) => {
+                return (
+                  <div className="wishlist_item" key={key}>
+                    <div className="wishlist_info">
+                      <Link to="#" onClick={() => handleDelete(item._id)}>
+                        <FaTimes color="#212529" fontSize={18} />
+                      </Link>
+                      <img src={ item.product.thumb[0] } alt={ item.product.name } />
+                      <span className="wishlist_info_name">{ item.product.name }</span>
+                    </div>
+                    <div className="wishlist_price">${ numberFormat(item.product.price) }</div>
+                    <div className="wishlist_action">
+                      <a href="#" className="button_checkout" onClick={() => handleAddToCart(item)}>
+                        <span className="button_checkout-subtotal">
+                          {
+                            isCartLoading === item._id ? <Loading backgroundColor="#fff" /> : <span>Add to cart</span>
+                          }
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <p>You don't have any favorite products yet. <Link to='/'>Go to the shop.</Link></p>
+            )
+         }
       </div>
     </div>
   )

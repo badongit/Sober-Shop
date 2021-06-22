@@ -5,16 +5,16 @@ import '../../../assets/styles/animation.scss'
 export default function Banner() {
     const [currentBanner, setCurrentBanner] = useState(1)
 
-    // useEffect(() => {
-    //     const slide = setInterval(() => {
-    //         setCurrentBanner(currentBanner + 1)
-    //     }, 5000)
-    //     return () => {
-    //         clearInterval(slide)
-    //     }
-    // }, [currentBanner])
+    useEffect(() => {
+        const slide = setInterval(() => {
+            setCurrentBanner(currentBanner + 1)
+        }, 5000)
+        return () => {
+            clearInterval(slide)
+        }
+    }, [currentBanner])
 
-    // if(currentBanner > 3) setCurrentBanner(1)
+    if(currentBanner > 3) setCurrentBanner(1)
 
     return (
         <div className="banner">
