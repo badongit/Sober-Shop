@@ -11,6 +11,7 @@ import Auth from 'features/Auth';
 import { useDispatch } from 'react-redux';
 import { getUser } from 'features/Auth/authSlice';
 import ScrollToTop from 'components/ScrollToTop';
+import NotFound from 'components/NotFound';
 
 function App() {
     const dispatch = useDispatch();
@@ -33,6 +34,7 @@ function App() {
                     <Route path="/contact" component={Contact}></Route>
                     <Route path="/team" component={Team}></Route>
                     <Route path="/user" component={Auth} />
+                    <Route component={NotFound} />
                 </Switch>
             </div>
         </Router>

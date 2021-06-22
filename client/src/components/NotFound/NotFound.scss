@@ -5,8 +5,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 
     h2 {
-        font-size: 50px;
+        font-size: 100px;
+    }
+
+    p {
+        font-size: 24px;
     }
 }
