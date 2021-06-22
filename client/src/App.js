@@ -10,6 +10,7 @@ import Team from 'pages/Team';
 import Auth from 'features/Auth';
 import { useDispatch } from 'react-redux';
 import { getUser } from 'features/Auth/authSlice';
+import ScrollToTop from 'components/ScrollToTop';
 
 function App() {
     const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function App() {
    
     return (
         <Router>
+            <ScrollToTop />
             <div className="App">
                 <Switch>
                     <Route path="/" exact component={Home}></Route>
