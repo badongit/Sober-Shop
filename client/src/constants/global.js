@@ -79,6 +79,14 @@ export const ENDPOINT = {
         getAll: '/cart',
         updateMany: '/cart',
     },
+    favouriteProduct: {
+        add: '/favouriteProduct',
+        getAll: '/favouriteProduct'
+    },
+    product: {
+        show: '/product', // /product/:id,
+
+    },
 
 };
 

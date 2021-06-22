@@ -12,7 +12,7 @@ const NavBar = [
     {
         id: "3",
         title: "Collection",
-        url: "/sober/collection"
+        url: "/collection"
     },
     {
         id: "4",

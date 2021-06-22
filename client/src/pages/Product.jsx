@@ -1,26 +1,50 @@
-import React, {useEffect} from 'react'
+import productApi from 'api/productApi'
 import Header from 'components/Header/Header'
+import Loading from 'components/Loading/Loading'
+import NotFound from 'components/NotFound'
 import ProductDetail from 'features/Product/components/ProductDetail/ProductDetail'
 import ProductReview from 'features/Product/components/ProductReview/ProductReview'
-import { getAllProduct } from 'features/Product/productSlice'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 export default function Product(props) {
-
-    const { product } = props;
-    const dispatch = useDispatch();
-    const productArr = useSelector(state => state.products.productArr)
-    useEffect(() => {
-        dispatch(getAllProduct())
-    }, [dispatch])
+    const [isLoading, setIsLoading] = useState(true);
+    const [product, setProduct] = useState(null);
+    const { id } = useParams();
     
-    const products = [...productArr].find(item => item._id === product._id)
+    useEffect(() => {
+        const loadProduct = async () => {
+            try {
+                setIsLoading(true);
 
-    return (
-        <div className="Product">
-            <Header />
-            <ProductDetail product={products}/>
-            <ProductReview/>
-        </div>
-    )
+                const productData = await productApi.show(id);
+
+                if (productData.success)
+                    setProduct(productData.data);
+                else
+                    console.log(productData.message);
+                
+                setIsLoading(false);
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
+
+        loadProduct();
+    }, [id]);
+
+    const body = isLoading ? (<div className="page-loading"><Loading backgroundColor="black" /></div>) :
+        !product ? (
+            <div className="Product">
+                <NotFound />
+            </div>
+        ) : (
+            <div className="Product">
+                <Header />
+                <ProductDetail product={product} />
+                <ProductReview />
+            </div>
+        );
+    
+    return body;
 }

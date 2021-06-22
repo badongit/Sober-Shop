@@ -6,6 +6,7 @@ import './productOverlay.scss'
 import '../ProductItem/productItem.scss'
 import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import favoriteProductApi from 'api/favoriteProductApi'
 
 export default function ProductOverlay(props) {
     const { product } = props;
@@ -14,7 +15,7 @@ export default function ProductOverlay(props) {
 
     const history = useHistory();
 
-    const [isWishListLoading, seTisWishListLoading] = useState(false);
+    const [isWishListLoading, setIsWishListLoading] = useState(false);
 
     const [isCartLoading, setIsCartLoading] = useState(false);
 
@@ -40,17 +41,23 @@ export default function ProductOverlay(props) {
     
     
         
-    const wishlistClick = () => {
-        seTisWishListLoading(true);
+    const wishlistClick = async () => {
+        try {
+            setIsWishListLoading(true);
 
-        setTimeout(() => {
-            seTisWishListLoading(false)
-        }, 1000);
+            const wishListData = await favoriteProductApi.add({ product: product._id, user: user._id })
+            
+            if (!wishListData.success)
+                console.log(wishListData.message);
+            
+            setIsWishListLoading(false);
+        } catch (error) {
+            console.log(error.message);
+        }
     }
     
     const redirect = () => {
-        window.scrollTo(0,0)
-        history.push('/sober/products')
+        history.push(`/product/${product._id}`)
     }
     
     return (

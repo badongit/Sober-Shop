@@ -1,3 +1,4 @@
+import { ENDPOINT } from 'constants/global';
 import axiosClient from './axiosClient';
 
 const productApi = {
@@ -7,8 +8,9 @@ const productApi = {
 
     },
 
-    getById: (id) => {
-        const url = `/product/${id}`;
+    show: (id) => {
+        const url = `${ENDPOINT.product.show}/${id}`;
+
         return axiosClient.get(url);
     },
 }
