@@ -7,6 +7,7 @@ import {useHistory} from "react-router-dom";
 
 export default function CheckoutForm() {
   const [isBtnLoading, setBtnLoading] = useState(false);
+  const [errorSubmit, setErrorSubmit] = useState('');
 
   const formReducer = (state, event) => {
     return {
@@ -31,7 +32,9 @@ export default function CheckoutForm() {
     };
 
     fetchCarts();
-  }, []);
+  }, [dispatch]);
+
+  console.log({errorSubmit});
 
   const history = useHistory();
 
@@ -41,22 +44,16 @@ export default function CheckoutForm() {
     setBtnLoading(true);
 
     try {
-      await dispatch(
-        addOrder({
-          body: {
-            ...formData,
-            carts
-          }
-        })
-      );
+      const checkoutData = await dispatch(addOrder({ body: { ...formData, carts } }));
 
-      history.push('/');
+      if (checkoutData.payload.success)
+        history.push('/');
+      else
+        setErrorSubmit(checkoutData.payload.message);
     } catch (error) {
       console.log(error.message);
     } finally {
-      setTimeout(function () {
-        setBtnLoading(false);
-      }, 1000);
+      setBtnLoading(false);
     }
   }
 
@@ -74,6 +71,7 @@ export default function CheckoutForm() {
               onInput={setFormData}
             />
           </p>
+            
           <p className="checkout__form__row">
             <label className="required">Phone number</label>
             <input
@@ -83,6 +81,9 @@ export default function CheckoutForm() {
               onInput={setFormData}
             />
           </p>
+          {
+            errorSubmit && <p style={{ color: 'red', fontSize: '12px' }}>{ errorSubmit }</p>
+          }
           <FormGroup>
             <button type="submit" className="checkout__form__submit--button">
               { isBtnLoading ? <Loading /> : 'Place order' }

@@ -20,7 +20,7 @@ function ProtectedRoute(WrappedComponent) {
         if(isAuthenticated) {
             return <WrappedComponent { ...props } />
         } else {
-            return <Redirect to='/auth' />
+            return <Redirect to='/user' />
         }
     };
 

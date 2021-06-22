@@ -24,7 +24,7 @@ export default function CartBody() {
     };
 
     fetchCarts();
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     const fetchWishList = async () => {
@@ -36,7 +36,7 @@ export default function CartBody() {
     };
 
     fetchWishList();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="Carousel">

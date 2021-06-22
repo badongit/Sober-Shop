@@ -17,7 +17,7 @@ export default function CartDetail(props) {
 
   const handleDeleteCart = async cartId => {
     try {
-      await dispatch(deleteCart({id: cartId}));
+      await dispatch(deleteCart({ id: cartId }));
     } catch (error) {
       console.log(error.message);
     }

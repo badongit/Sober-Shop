@@ -6,7 +6,7 @@ import cartApi from "../../../api/cartApi";
 import Loading from "../../Loading/Loading";
 import {Link, useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {deleteWishList} from "../CartSlice";
+import {deleteWishList, getAllCarts} from "../CartSlice";
 
 export default function Wishlist(props) {
   const dispatch = useDispatch();
@@ -20,9 +20,9 @@ export default function Wishlist(props) {
 
       await cartApi.add({ productId: product._id, quantity: 1 });
 
-      setTimeout(() => {
-        setIsCartLoading(null);
-      }, 1000);
+      await dispatch(getAllCarts());
+      
+      setIsCartLoading(null);
 
     } catch (error) {
       console.log(error.message);
