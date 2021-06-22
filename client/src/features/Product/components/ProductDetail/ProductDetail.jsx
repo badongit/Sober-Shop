@@ -1,30 +1,43 @@
-import React, { useState } from 'react'
-// import IMAGES from '../../../../constants/image'
-// import {PRODUCT_CATEGORY as products} from '../../../../constants/global'
+import React, { useState, useEffect } from 'react'
 import ReactStars from 'react-rating-stars-component'
 import {
-    FaMinus,
-    FaPlus,
-    FaCartPlus,
-    FaRegHeart,
-    FaAngleRight,
-    FaChevronLeft,
-    FaChevronRight,
-    FaFacebook,
-    FaTwitter,
-    FaPinterest
+    FaMinus, FaPlus, FaCartPlus, FaRegHeart,
+    FaAngleRight, FaChevronLeft, FaChevronRight,
+    FaFacebook, FaTwitter, FaPinterest
 } from 'react-icons/fa'
 import './productDetail.scss'
 import { Link } from 'react-router-dom'
+import cartApi from 'api/cartApi'
 
 
 export default function ProductDetail({product}) {
 
     const [countCart, setCountCart] = useState(1);
     const [imgIndex, setImgIndex] = useState(0);
+    const [listImage ] = useState(() => {
+        return product?.listImage?.length ? product.listImage : product.thumb;
+    });
 
-    if (imgIndex >= product.listImage.length) setImgIndex(0);
+    const cartClick = async () => {
+        try {
+            const cart = await cartApi.add({ productId: product._id, quantity: countCart })
+            console.log(cart);
+        } catch (error) {
+            console.log(error);
+        }
+        
+    }
 
+
+    const handleChangeImageIndex = (index) => {
+        if (index >= listImage.length)
+            return setImgIndex(0);
+        if (index < 0)
+            return setImgIndex(listImage.length - 1);
+        
+        setImgIndex(index);
+    }
+    
     return (
         <div className="ProductDetail">
             <div className="product-leave">
@@ -37,11 +50,12 @@ export default function ProductDetail({product}) {
             <div className="product-detail-container">
                 <div className="product-gallery flex">
                     <div className="product-small" >
-                        {product.listImage.map((item,index) => {
+                        {listImage.map((item,index) => {
                             return (
                                 <div
                                     className={imgIndex === index ? "product-small-item product-small-item-active" : "product-small-item"}
                                     key={item}
+                                    onClick={() => setImgIndex(index)}
                                 >
                                     <img 
                                         src={item} 
@@ -52,12 +66,11 @@ export default function ProductDetail({product}) {
                         })}
                     </div>
                     <div className="product-slider">
-                        {product.listImage.map((item, index) => {
+                        {listImage.map((item, index) => {
                         return (
                             <div className="product-big" style={{ left: `calc(${index - imgIndex}*100%)`}} key={index}>
                                 <div className="product-big-item" >
                                     <img
-                                        id={index}
                                         src={item}
                                         alt="" 
                                     />
@@ -67,17 +80,13 @@ export default function ProductDetail({product}) {
                         })}
                         <div 
                             className="change-product left"
-                            onClick={() => {
-                                if(imgIndex > 0) setImgIndex(imgIndex-1)
-                            }}
+                            onClick={() => handleChangeImageIndex(imgIndex - 1)}
                         >
                             <FaChevronLeft/>
                         </div>
                         <div 
                             className="change-product right"
-                            onClick={() => {
-                                if(imgIndex < product.listImage.length && product.listImage.length) setImgIndex(imgIndex+1)
-                            }}
+                            onClick={() => handleChangeImageIndex(imgIndex + 1)}
                         >
                             <FaChevronRight/>
                         </div>
@@ -126,7 +135,7 @@ export default function ProductDetail({product}) {
                                 <FaPlus/>
                             </div>
                         </div>
-                        <div className="product-info-addtocart">
+                        <div className="product-info-addtocart" onClick={cartClick}>
                             <FaCartPlus/>
                             <span>Add to cart</span>
                         </div>

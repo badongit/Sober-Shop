@@ -13,19 +13,21 @@ import { getUser } from 'features/Auth/authSlice';
 
 function App() {
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         dispatch(getUser());
+        window.scrollTo(0, 0);
     }, [dispatch]);
    
+
     return (
         <Router>
             <div className="App">
                 <Switch>
                     <Route path="/" exact component={Home}></Route>
                     <Route path="/shop" component={Shop}></Route>
-                    <Route path="/sober/collection" component={Collection}></Route>
-                    <Route path="/sober/products" component={Product}></Route>
+                    <Route path="/collection" component={Collection}></Route>
+                    <Route path="/product/:id" component={Product}></Route>
                     <Route path="/contact" component={Contact}></Route>
                     <Route path="/team" component={Team}></Route>
                     <Route path="/user" component={Auth} />
