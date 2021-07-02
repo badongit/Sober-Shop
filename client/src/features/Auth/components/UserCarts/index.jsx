@@ -1,7 +1,7 @@
 import cartApi from 'api/cartApi';
 import Loading from 'components/Loading/Loading';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Button, Col, Container, Row } from 'reactstrap';
 import './UserCarts.scss';
 
@@ -9,6 +9,7 @@ function UserCarts(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [carts, setCarts] = useState([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const history = useHistory();
 
     useEffect(() => {
         const loadCart = async () => {
@@ -144,7 +145,7 @@ function UserCarts(props) {
                                     </Col>
                                 </Row>
                                 <div className="wrapper-btn">
-                                    <Button className="user-carts__btn-submit" onClick={handleUpdateCart}>
+                                    <Button className="user-carts__btn-submit" onClick={() => history.push('/sober/checkout')}>
                                         PROCEED TO CHECKOUT
                                     </Button>
                                 </div>
