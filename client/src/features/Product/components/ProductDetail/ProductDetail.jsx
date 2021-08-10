@@ -9,7 +9,6 @@ import './productDetail.scss'
 import { Link } from 'react-router-dom'
 import cartApi from 'api/cartApi'
 
-
 export default function ProductDetail({product}) {
 
     const [countCart, setCountCart] = useState(1);

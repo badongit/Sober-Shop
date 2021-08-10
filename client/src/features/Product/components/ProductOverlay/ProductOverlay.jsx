@@ -44,13 +44,17 @@ export default function ProductOverlay(props) {
     const wishlistClick = async () => {
         try {
             setIsWishListLoading(true);
-
-            const wishListData = await favoriteProductApi.add({ product: product._id, user: user._id })
-            
-            if (!wishListData.success)
+            if (user) {
+                const wishListData = await favoriteProductApi.add({ product: product._id, user: user._id })
+                
+                if (!wishListData.success)
                 console.log(wishListData.message);
+            } else {
+                history.push('/user')
+            }
+
             setTimeout(() => {
-            setIsWishListLoading(false);
+                setIsWishListLoading(false);
             }, 1000);
 
         } catch (error) {
