@@ -1,4 +1,3 @@
-require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const ErrorResponse = require("../helpers/ErrorResponse");
 const redisClient = require("../config/redis");
@@ -35,9 +34,10 @@ const verifyRefreshToken = async (req, res, next) => {
   try {
     const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
 
-        redisClient.get(decoded.userId.toString(), function(error, redisRefreshToken) {
-            if(error) 
-               return next(new ErrorResponse(401, error.message));
+    redisClient.get(
+      decoded.userId.toString(),
+      function (error, redisRefreshToken) {
+        if (error) return next(new ErrorResponse(401, error.message));
 
         // Check token stored in redis
         if (!redisRefreshToken) {
