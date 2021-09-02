@@ -26,7 +26,7 @@ export default function ShopBody() {
         const fetchCategory = async () => {
             try {
                 const response = await categoryApi.getAll();
-                console.log(response);
+                // console.log(response);
                 setCategories(response.data);
             } catch (error) {
                 console.log('Failed to fetch category list', error);
@@ -41,7 +41,7 @@ export default function ShopBody() {
             try {
                 await dispatch(getAllProduct())
             } catch (error) {
-                console.log(error);
+                console.log(error.Col.message);
             }
         }
         
@@ -64,12 +64,10 @@ export default function ShopBody() {
     const hotProduct = listproductItem.filter(product => product.sold >= 40);
     const saleProduct = listproductItem.filter(product => product.discount > 0);
     const newProduct = listproductItem.sort().filter(product => (Date.now() - Date.parse(product.createdAt)) / (3600 * 24 * 1000) < 10)
-    // console.log({ hotProduct, saleProduct, newProduct });
 
     const limitHotProduct = [...hotProduct].slice(0, limit);
     const limitSaleProduct = [...saleProduct].slice(0, limit);
     const limitNewProduct = [...newProduct].slice(0, limit);
-    // console.log({limitHotProduct, limitSaleProduct, limitNewProduct});
 
     return (
         <div className="ShopBody">

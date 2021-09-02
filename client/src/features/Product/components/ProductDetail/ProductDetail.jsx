@@ -7,7 +7,10 @@ import {
 } from 'react-icons/fa'
 import './productDetail.scss'
 import { Link } from 'react-router-dom'
-import cartApi from 'api/cartApi'
+// import cartApi from 'api/cartApi'
+import { useDispatch, useSelector } from 'react-redux'
+import { addCart } from 'components/Cart/CartSlice'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 export default function ProductDetail({product}) {
 
@@ -16,15 +19,27 @@ export default function ProductDetail({product}) {
     const [listImage ] = useState(() => {
         return product?.listImage?.length ? product.listImage : product.thumb;
     });
+    const user = useSelector(state => state.auth.user);
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const cartClick = async () => {
-        try {
-            const cart = await cartApi.add({ productId: product._id, quantity: countCart })
-            console.log(cart);
+        // try {
+        //     const cart = await cartApi.add({ productId: product._id, quantity: countCart })
+        //     console.log(cart);
 
-        } catch (error) {
-            console.log(error);
-        }   
+        // } catch (error) {
+        //     console.log(error);
+        // }  
+        try {
+            if (user) {
+                await dispatch(addCart({ body: { productId: product._id, quantity: countCart } }));
+            } else {
+                history.push('/user')
+            }
+       } catch (error) {
+           console.log(error.message);
+       }
     }
 
     const handleChangeImageIndex = (index) => {
@@ -35,7 +50,7 @@ export default function ProductDetail({product}) {
         
         setImgIndex(index);
     }
-    
+
     return (
         <div className="ProductDetail">
             <div className="product-leave">
@@ -134,7 +149,7 @@ export default function ProductDetail({product}) {
                             </div>
                         </div>
                         <div className="product-info-addtocart" onClick={cartClick}>
-                            <FaCartPlus/>
+                            <FaCartPlus />
                             <span>Add to cart</span>
                         </div>
                         <div className="product-info-wishlist">

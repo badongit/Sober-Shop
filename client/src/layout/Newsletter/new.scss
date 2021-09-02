@@ -1,6 +1,7 @@
 .Newsletter {
   width: 100%;
   padding: 50px 0;
+  box-sizing: border-box;
 
   .newsletter-container {
     display: flex;
@@ -69,10 +70,19 @@
     }
 }
   
-
-
-  
-
+@media (max-width: 321px) {
+  .newsletter-container {
+    align-items: flex-start!important;
+  }
+  .newsletter-title{
+    text-align: center;
+    margin: 0 auto;
+  }
+  .newsletter-btn {
+    font-size: 11px!important;
+    padding: 5px 10px;
+  }
+}
   
 
   

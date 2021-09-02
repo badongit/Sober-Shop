@@ -1,4 +1,4 @@
-import favouriteProductApi from "../api/favouriteProductApi";
+// import favouriteProductApi from "../api/favouriteProductApi";
 
 export const PRODUCT_CATEGORY = [
     {
@@ -88,7 +88,7 @@ export const ENDPOINT = {
         getAll: '/favouriteProduct',
         delete: '/favouriteProduct'
     },
-    favouriteProduct: {
+    favoriteProduct: {
         add: '/favouriteProduct',
         getAll: '/favouriteProduct'
     },

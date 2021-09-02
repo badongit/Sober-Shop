@@ -18,7 +18,7 @@ export default function CheckoutOrder() {
     };
 
     fetchCarts();
-  }, []);
+  }, [dispatch]);
 
   const totalPrice = carts.reduce((acc, cur) => {
     acc += cur.product.price;

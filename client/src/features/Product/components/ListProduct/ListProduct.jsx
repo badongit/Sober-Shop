@@ -29,7 +29,7 @@ export default function ListProduct({product}) {
                         <Row>
                             {limitProduct.map((item,index) => {
                                 return (
-                                    <Col sm="4" lg="2" key={item._id}>
+                                    <Col sm="3" lg="2" key={item._id}>
                                         <ProductItem
                                             product={item}
                                         />
