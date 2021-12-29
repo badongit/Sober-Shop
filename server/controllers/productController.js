@@ -47,9 +47,23 @@ module.exports = {
       conditions.price.$lte = req.query.max_price;
     }
 
-    const products = await Product.find(conditions);
+    const page = +req.query.page || 1;
+    const limit = +req.query.limit || 10;
+    const startIndex = (page - 1) * limit;
+    const total = await Product.countDocuments(conditions);
+    const totalPage = Math.ceil(total / limit);
+    const pagination = {
+      page,
+      limit,
+      total,
+      totalPage,
+    };
 
-    return sendResponse(res, "Get list successfully.", products);
+    const products = await Product.find(conditions)
+      .skip(startIndex)
+      .limit(limit);
+
+    return sendResponse(res, "Get list successfully.", products, pagination);
   }),
 
   show: asyncHandle(async (req, res) => {
@@ -74,5 +88,5 @@ module.exports = {
     const product = await Product.findByIdAndDelete(req.params.id);
 
     return sendResponse(res, "Delete successfully.", product);
-  })
+  }),
 };
