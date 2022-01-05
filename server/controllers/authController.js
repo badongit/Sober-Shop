@@ -79,7 +79,7 @@ module.exports = {
         const passwordValid = await bcrypt.compare(password, user.password);
 
         if(!passwordValid) {
-            return next(new ErrorResponse(400, 'Incorect username or password'));
+            return next(new ErrorResponse(400, 'Incorrect username or password'));
         }
 
         // Everything is good
