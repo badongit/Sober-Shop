@@ -5,21 +5,16 @@ import '../ProductItem/productItem.scss'
 import Loading from 'components/Loading/Loading';
 import { Col, Container, Row } from 'reactstrap';
 
-export default function ListProduct({product}) {
-
-    const [limit, setLimit] = useState(12);
-    const [loading, setLoading] = useState(false)
-    const listProductItem = product;
+export default function ListProduct({ product, onIncreasePage }) {
+    const [loading, setLoading] = useState(false);
 
     const handleClickIncrease = () => {
         setLoading(true);
         setTimeout(() => {
-            setLoading(false)
-            setLimit(limit+6);
-        },2000)
+            setLoading(false);
+            onIncreasePage();
+        }, 1000)
     }
-    const limitProduct = listProductItem.slice(0, limit);
-    // console.log(limitProduct);
 
     return (
         <div>
@@ -27,9 +22,9 @@ export default function ListProduct({product}) {
                 <div className="ProductItem">
                     <Container fluid="true" >
                         <Row>
-                            {limitProduct.map((item,index) => {
+                            {product.map((item, index) => {
                                 return (
-                                    <Col sm="4" lg="2" key={item._id}>
+                                    <Col sm="4" lg="2" key={index}>
                                         <ProductItem
                                             product={item}
                                         />

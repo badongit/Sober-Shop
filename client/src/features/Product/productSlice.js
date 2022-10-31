@@ -1,9 +1,14 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import productApi from 'api/productApi'
+import { DEFAULT_PAGE, LIMIT } from 'constants/global';
 
 
 export const getAllProduct = createAsyncThunk('product/getAllProduct', async (params, thunkAPI) => {
-    const productData = await productApi.getAll();
+    const values = {
+        page: DEFAULT_PAGE,
+        limit: LIMIT
+    }
+    const productData = await productApi.getAll(values);
 
     if (productData.success) {
         thunkAPI.dispatch(initProduct(productData.data));

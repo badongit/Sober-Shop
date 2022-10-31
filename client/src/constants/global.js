@@ -1,5 +1,3 @@
-import favouriteProductApi from "../api/favouriteProductApi";
-
 export const PRODUCT_CATEGORY = [
     {
         name: "Red Hoodie",
@@ -88,10 +86,6 @@ export const ENDPOINT = {
         getAll: '/favouriteProduct',
         delete: '/favouriteProduct'
     },
-    favouriteProduct: {
-        add: '/favouriteProduct',
-        getAll: '/favouriteProduct'
-    },
     product: {
         show: '/product', // /product/:id,
 
@@ -104,3 +98,6 @@ export const LOCAL_STORAGE = {
     refreshToken: 'x-refresh-token',
 
 };
+
+export const DEFAULT_PAGE = 1;
+export const LIMIT = 12;

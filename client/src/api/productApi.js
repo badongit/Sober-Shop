@@ -2,10 +2,9 @@ import { ENDPOINT } from 'constants/global';
 import axiosClient from './axiosClient';
 
 const productApi = {
-    getAll: () => {
-        const url = '/product';
+    getAll: ({ page, limit }) => {
+        const url = `/product?page=${page}&limit=${limit}`;
         return axiosClient.get(url);
-
     },
 
     show: (id) => {
